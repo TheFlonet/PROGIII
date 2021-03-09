@@ -1,0 +1,47 @@
+TODO mail server
+    TODO gestione lista caselle
+    TODO persistenza mail (txt o binari)
+    TODO UI con log di sistema
+        (es. apertura / chiusura connessione,
+            invio di messaggi da un client,
+            ricezione messaggi da un client,
+            errori nella consegna)
+
+TODO mail client
+    TODO UI
+        creare e inviare un messaggio a 1+ destinatari
+        leggere messaggi
+        rispondere a un messaggio (Reply e Reply-all)
+        inoltrare un messaggio (forward)
+        rimuovere un messaggio di posta
+    TODO aggiornamento lista messaggio in tempo reale
+    TODO notifica di arrivo messaggio (con finestra di dialogo)
+    NB no registrazione (un mail client == una sola casella di posta -> no login)
+    TODO robustezza in caso di server down (errori gestiti e comunicati a utente)
+    TODO riconnessione del client quando il server è attivo
+
+TODO casella di posta
+    TODO email associata
+    TODO lista messaggi (anche vuota)
+        (i messaggi sono istanze di una classe email con
+           ID, mittente, destinatario/i, argomento,
+           testo, data spedizione del messaggio)
+
+Note tecniche
+- 3 utenti che comunicano tra loro (ma il sistema deve essere scalabile)
+- uso di java e javaFXML basata su MVC con patter observer observable
+    (no comunicazione diretta vista - model)
+- no classi deprecate
+- possibilità di correggere input errati (es. invio a account non esistenti,
+    il server invia errore e il client lo mostra,
+    invio a indirizzi mal formati,
+    il client mostra errore)
+- client e server agiscono con azione parallele (gestione MutEx)
+- client e server sono applicazioni java distinte
+- creazione / gestione dei messaggi avviene in parallelo alla ricezione di altri messaggi
+- l'applicazione deve essere distribuita (su jvm distinte) -> uso dei socket
+
+Note tecniche interfaccia:
+- comprensibile (trasparente) (deve segnalare i problemi)
+- efficiente (minor numero possibile di click)
+- javaFXML, thread, consigliato java beans, properties e binding
