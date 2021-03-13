@@ -2,7 +2,9 @@ package progiii.client.home;
 
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.beans.value.ObservableValue;
+import progiii.client.writer.WriterView;
 import progiii.common.Email;
 import progiii.common.EmailAddress;
 
@@ -10,18 +12,29 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ClientModel {
-    private SimpleBooleanProperty connected;
-    private SimpleStringProperty status;
+    private final SimpleBooleanProperty isConnected;
+    private final WriterView writer;
+    private final StringProperty status;
     private final EmailAddress email;
-    private List<Email> messages;
+    private final List<Email> messages;
 
     public ClientModel() {
         this.email = new EmailAddress();
+        this.email.setEmail("mariobifulco@gmail.com"); // TODO cambiare indirizzo per avviare client diversi
         messages = new ArrayList<>();
-        connected = new SimpleBooleanProperty();
-        connected.set(false);
+        isConnected = new SimpleBooleanProperty();
+        isConnected.set(false);
         status = new SimpleStringProperty();
         status.set("");
+        writer = new WriterView();
+    }
+
+    public EmailAddress getEmail() {
+        return email;
+    }
+
+    public WriterView getWriter() {
+        return writer;
     }
 
     public void setStatus(String status) {
@@ -29,25 +42,15 @@ public class ClientModel {
     }
 
     public boolean isConnected() {
-        return connected.get();
+        return isConnected.get();
     }
 
     public void setConnected(boolean connected) {
-        this.connected.set(connected);
+        this.isConnected.set(connected);
     }
 
     public SimpleBooleanProperty connectedProperty() {
-        return connected;
-    }
-
-    // TODO rimuovere (solo per test)
-    public EmailAddress getEmail() {
-        return email;
-    }
-
-    //TODO rimuovere (solo per test)
-    public List<Email> getMessages() {
-        return messages;
+        return isConnected;
     }
 
     public void addMessage(Email email) {

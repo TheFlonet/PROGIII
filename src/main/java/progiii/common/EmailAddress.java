@@ -1,13 +1,15 @@
 package progiii.common;
 
+import javafx.beans.property.SimpleStringProperty;
+
 import java.util.regex.Pattern;
 
 public class EmailAddress {
-    private String email;
+    private SimpleStringProperty email = new SimpleStringProperty();
 
     public void setEmail(String email) {
         if (isValid(email))
-            this.email = email;
+            this.email.set(email);
         else
             throw new InvalidEmailException("E-mail not valid. A valid email is like: example@email.com");
     }
@@ -18,7 +20,11 @@ public class EmailAddress {
         return pattern.matcher(email).matches();
     }
 
-    public String getEmail() {
+    public SimpleStringProperty getEmailProperty() {
         return email;
+    }
+
+    public String getEmail() {
+        return email.get();
     }
 }
