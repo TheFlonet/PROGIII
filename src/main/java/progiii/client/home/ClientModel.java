@@ -2,6 +2,7 @@ package progiii.client.home;
 
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableValue;
 import progiii.common.Email;
 import progiii.common.EmailAddress;
 
@@ -10,6 +11,7 @@ import java.util.List;
 
 public class ClientModel {
     private SimpleBooleanProperty connected;
+    private SimpleStringProperty status;
     private final EmailAddress email;
     private List<Email> messages;
 
@@ -18,6 +20,12 @@ public class ClientModel {
         messages = new ArrayList<>();
         connected = new SimpleBooleanProperty();
         connected.set(false);
+        status = new SimpleStringProperty();
+        status.set("");
+    }
+
+    public void setStatus(String status) {
+        this.status.set(status);
     }
 
     public boolean isConnected() {
@@ -44,5 +52,13 @@ public class ClientModel {
 
     public void addMessage(Email email) {
         messages.add(email);
+    }
+
+    public ObservableValue<String> getStatusProperty() {
+        return status;
+    }
+
+    public String getStatus() {
+        return status.get();
     }
 }
