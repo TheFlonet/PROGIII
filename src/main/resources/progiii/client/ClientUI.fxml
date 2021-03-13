@@ -16,7 +16,7 @@
         prefWidth="600.0"
         xmlns="http://javafx.com/javafx"
         xmlns:fx="http://javafx.com/fxml"
-        fx:controller="progiii.client.ClientController">
+        fx:controller="progiii.client.home.ClientController">
     <TabPane
             layoutX="240.0" layoutY="130.0"
             prefHeight="400.0" prefWidth="360.0"
@@ -56,18 +56,21 @@
                 mnemonicParsing="false" text="Write"
                 AnchorPane.leftAnchor="25.0"
                 AnchorPane.rightAnchor="25.0"
-                AnchorPane.topAnchor="75.0"/>
+                AnchorPane.topAnchor="75.0"
+                onAction="#writeEmail"/>
         <Button
                 layoutX="50.0" layoutY="310.0"
                 mnemonicParsing="false" text="Reconnect"
                 AnchorPane.bottomAnchor="60.0"
                 AnchorPane.leftAnchor="25.0"
-                AnchorPane.rightAnchor="25.0"/>
+                AnchorPane.rightAnchor="25.0"
+                onAction="#reconnect"/>
         <Button
                 layoutX="60.0" layoutY="255.0"
                 mnemonicParsing="false" text="About"
                 AnchorPane.bottomAnchor="25.0"
                 AnchorPane.leftAnchor="25.0"
-                AnchorPane.rightAnchor="25.0"/>
+                AnchorPane.rightAnchor="25.0"
+                onAction="#about"/>
     </AnchorPane>
 </AnchorPane>

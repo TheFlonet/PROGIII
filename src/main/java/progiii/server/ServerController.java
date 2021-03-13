@@ -20,20 +20,16 @@ import java.util.concurrent.Executors;
 
 public class ServerController implements Initializable {
     private static final int THREAD_NUM = 15;
+    private ServerModel model;
     @FXML
     public TextArea logText;
-    @FXML
-    public Button clearBtn;
-    @FXML
-    public Button dumpBtn;
-    private ServerModel model;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         if (model != null)
             throw new IllegalStateException("Model can be initialized only once");
         model = new ServerModel();
-        logText.textProperty().bindBidirectional(model.getLog());
+        logText.textProperty().bind(model.getLog());
 
         try {
             ExecutorService pool = Executors.newFixedThreadPool(THREAD_NUM);
