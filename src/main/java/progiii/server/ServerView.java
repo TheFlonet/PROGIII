@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 public class ServerView extends Application {
     @Override
     public void start(Stage stage) throws Exception {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/ServerUI.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/progiii/server/ServerUI.fxml"));
         Parent root = fxmlLoader.load();
         stage.setTitle("E-Mail server");
         stage.setScene(new Scene(root));
