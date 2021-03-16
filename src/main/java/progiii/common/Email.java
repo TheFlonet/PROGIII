@@ -6,8 +6,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class Email implements Serializable {
-    private static int mailCounter = 0;
-    private final int ID;
+    private int ID = 0;
     private final EmailAddress sender;
     private final List<EmailAddress> receiver;
     private final String subject;
@@ -40,7 +39,7 @@ public class Email implements Serializable {
     }
 
     public Email(EmailAddress sender, List<EmailAddress> receiver, String subject, String text) {
-        ID = mailCounter++;
+        ID = ID++;
         this.sender = sender;
         this.receiver = receiver;
         this.subject = subject;
@@ -48,8 +47,12 @@ public class Email implements Serializable {
         sentDate = ZonedDateTime.now();
     }
 
-    public static int getMailCounter() {
-        return mailCounter;
+    public String getReceiversString() {
+        List<EmailAddress> receivers = getReceiver();
+        StringBuilder out = new StringBuilder();
+        for (EmailAddress receiver : receivers)
+            out.append(out.toString().equals("") ? receiver.getEmail() : ", " + receiver.getEmail());
+        return out.toString();
     }
 
     public int getID() {

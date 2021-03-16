@@ -16,14 +16,14 @@
              AnchorPane.topAnchor="0.0">
         <Tab text="InBox">
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="370.0" prefWidth="360.0">
-                <ListView layoutX="82.0" layoutY="68.0" prefHeight="200.0" prefWidth="200.0"
+                <ListView fx:id="inbox" layoutX="82.0" layoutY="68.0" prefHeight="200.0" prefWidth="200.0"
                           AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0"
                           AnchorPane.topAnchor="5.0"/>
             </AnchorPane>
         </Tab>
         <Tab text="OutBox">
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                <ListView layoutX="112.0" layoutY="101.0" prefHeight="200.0" prefWidth="200.0"
+                <ListView fx:id="outbox" layoutX="112.0" layoutY="101.0" prefHeight="200.0" prefWidth="200.0"
                           AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0"
                           AnchorPane.topAnchor="5.0"/>
             </AnchorPane>

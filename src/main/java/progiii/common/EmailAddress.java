@@ -7,6 +7,10 @@ import java.util.regex.Pattern;
 public class EmailAddress {
     private SimpleStringProperty email = new SimpleStringProperty();
 
+    public EmailAddress(String email) {
+        setEmail(email);
+    }
+
     public void setEmail(String email) {
         if (isValid(email))
             this.email.set(email);
