@@ -1,4 +1,4 @@
-package common.data;
+package progiii.common.data;
 
 import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;

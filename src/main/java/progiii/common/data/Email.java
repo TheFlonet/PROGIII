@@ -1,4 +1,4 @@
-package common.data;
+package progiii.common.data;
 
 import java.io.*;
 import java.text.SimpleDateFormat;
