@@ -1,5 +1,7 @@
 package progiii.client.network.request;
 
+import progiii.common.network.RequestType;
+
 import java.io.Serializable;
 
 public abstract class Request implements Serializable {

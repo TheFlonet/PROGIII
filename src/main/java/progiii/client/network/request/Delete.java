@@ -1,6 +1,7 @@
 package progiii.client.network.request;
 
 import progiii.common.data.Email;
+import progiii.common.network.RequestType;
 
 import java.util.Objects;
 import java.util.Set;

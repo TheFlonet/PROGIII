@@ -1,6 +1,6 @@
 package progiii.server.network.response;
 
-import com.sun.net.httpserver.Authenticator;
+import progiii.common.network.ResponseType;
 
 public class Delete extends Response {
     public Delete(boolean success, String status) {

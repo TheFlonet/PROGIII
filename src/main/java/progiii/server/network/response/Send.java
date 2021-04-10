@@ -1,5 +1,7 @@
 package progiii.server.network.response;
 
+import progiii.common.network.ResponseType;
+
 public class Send extends Response {
     public Send(boolean success, String status) {
         super(success, status);

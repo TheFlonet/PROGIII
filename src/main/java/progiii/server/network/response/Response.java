@@ -1,6 +1,6 @@
 package progiii.server.network.response;
 
-import progiii.client.network.request.RequestType;
+import progiii.common.network.ResponseType;
 
 import java.io.Serializable;
 

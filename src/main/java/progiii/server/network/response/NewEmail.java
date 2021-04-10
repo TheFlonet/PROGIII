@@ -1,6 +1,7 @@
 package progiii.server.network.response;
 
 import progiii.common.data.Email;
+import progiii.common.network.ResponseType;
 
 import java.util.Arrays;
 import java.util.Set;

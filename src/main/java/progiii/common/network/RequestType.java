@@ -1,4 +1,4 @@
-package progiii.client.network.request;
+package progiii.common.network;
 
 public enum RequestType {
     CHECK,

@@ -1,5 +1,7 @@
 package progiii.client.network.request;
 
+import progiii.common.network.RequestType;
+
 public class Auth extends Request{
 
     public Auth(String email) {

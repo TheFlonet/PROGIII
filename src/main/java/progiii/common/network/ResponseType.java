@@ -1,4 +1,4 @@
-package progiii.server.network.response;
+package progiii.common.network;
 
 public enum ResponseType {
     DELETE,

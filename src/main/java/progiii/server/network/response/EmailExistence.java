@@ -1,5 +1,7 @@
 package progiii.server.network.response;
 
+import progiii.common.network.ResponseType;
+
 import java.util.Map;
 import java.util.stream.Collectors;
 

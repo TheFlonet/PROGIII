@@ -1,5 +1,7 @@
 package progiii.server.network.response;
 
+import progiii.common.network.ResponseType;
+
 public class Error extends Response{
     public Error(String status) {
         super(false, status);
