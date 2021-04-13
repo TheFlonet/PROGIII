@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--suppress JavaFxDefaultTag -->
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<BorderPane minHeight="630.0" minWidth="800.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.2-internal"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.MainController">
+    <center>
+        <SplitPane dividerPositions="0.20551378446115287" prefHeight="421.0" prefWidth="800.0"
+                   BorderPane.alignment="CENTER">
+            <items>
+                <GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="160.0"
+                          SplitPane.resizableWithParent="false">
+                    <columnConstraints>
+                        <ColumnConstraints halignment="CENTER" maxWidth="1.7976931348623157E308" minWidth="10.0"/>
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints valignment="CENTER"/>
+                        <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="455.0"
+                                        vgrow="ALWAYS"/>
+                    </rowConstraints>
+                    <children>
+                        <GridPane>
+                            <columnConstraints>
+                                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0"/>
+                                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0"/>
+                            </columnConstraints>
+                            <rowConstraints>
+                                <RowConstraints minHeight="30.0" vgrow="SOMETIMES"/>
+                            </rowConstraints>
+                            <children>
+                                <Button mnemonicParsing="false" onMouseClicked="#openNewEmailTab" text="Scrivi">
+                                    <graphic>
+                                        <FontAwesomeIcon glyphName="FILE" size="12pt"/>
+                                    </graphic>
+                                    <tooltip>
+                                        <Tooltip text="Nuova Email"/>
+                                    </tooltip>
+                                    <opaqueInsets>
+                                        <Insets/>
+                                    </opaqueInsets>
+                                </Button>
+                                <Button mnemonicParsing="false" onMouseClicked="#logoutButtonClicked" text="Logout"
+                                        GridPane.columnIndex="1">
+                                    <graphic>
+                                        <FontAwesomeIcon glyphName="SIGN_OUT" size="12pt"/>
+                                    </graphic>
+                                    <tooltip>
+                                        <Tooltip text="Logout"/>
+                                    </tooltip>
+                                </Button>
+                            </children>
+                        </GridPane>
+                        <ListView fx:id="receivedEmailsList" editable="true" maxHeight="1.7976931348623157E308"
+                                  onKeyReleased="#handleEmailListKeyboardTyped"
+                                  onMouseClicked="#handleEmailListMouseClick" GridPane.hgrow="ALWAYS"
+                                  GridPane.rowIndex="1"/>
+                    </children>
+                </GridPane>
+                <TabPane fx:id="emailTabPane" minHeight="598.0" minWidth="630.0" prefHeight="200.0" prefWidth="200.0"
+                         tabClosingPolicy="ALL_TABS"/>
+            </items>
+        </SplitPane>
+    </center>
+    <bottom>
+        <AnchorPane BorderPane.alignment="CENTER">
+            <children>
+                <Label fx:id="statusLabel" alignment="TOP_RIGHT" text="Barra di stato" textAlignment="RIGHT"
+                       AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="0.0">
+                    <padding>
+                        <Insets bottom="2.0" left="2.0" right="2.0" top="2.0"/>
+                    </padding>
+                </Label>
+            </children>
+        </AnchorPane>
+    </bottom>
+</BorderPane>

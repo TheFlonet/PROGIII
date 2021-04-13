@@ -1,0 +1,130 @@
+<!--suppress JavaFxDefaultTag -->
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<Tab fx:id="rootTab" fx:controller="client.controllers.ReceivedEmailTabController"
+     xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+    <content>
+        <GridPane>
+            <children>
+                <AnchorPane minHeight="125.0" minWidth="0.0" prefHeight="125.0"
+                            prefWidth="160.0">
+                    <children>
+                        <Label fx:id="fromNode"
+                               layoutX="40.0" layoutY="50.0"
+                               AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="50.0"/>
+                        <Label text="A:"
+                               layoutX="14.0" layoutY="70.0"
+                               AnchorPane.leftAnchor="22.0" AnchorPane.topAnchor="75.0"/>
+                        <Label fx:id="subjectNode"
+                               layoutX="14.0" layoutY="8.0"
+                               AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="10.0">
+                            <font>
+                                <Font name="System Bold" size="24.0"/>
+                            </font>
+                        </Label>
+                        <Label layoutX="14.0" layoutY="49.0" text="Da: "
+                               AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="50.0"/>
+                        <Label fx:id="toNode"
+                               layoutX="40.0" layoutY="70.0"
+                               AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="75.0"/>
+                        <Label fx:id="dateSent"
+                               layoutX="5.0" layoutY="91.0"
+                               AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="100.0"/>
+                        <GridPane alignment="CENTER_RIGHT" hgap="5.0" layoutX="237.0"
+                                  layoutY="16.0" prefHeight="21.0" prefWidth="100.0" vgap="5.0"
+                                  AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+                            <children>
+                                <Button fx:id="replyButton"
+                                        onMouseClicked="#handleReplyButtonClick"
+                                        mnemonicParsing="false">
+                                    <graphic>
+                                        <FontAwesomeIcon glyphName="MAIL_REPLY" size="12pt"/>
+                                    </graphic>
+                                    <tooltip>
+                                        <Tooltip text="Rispondi"/>
+                                    </tooltip>
+                                </Button>
+                                <Button fx:id="replyAllButton"
+                                        onMouseClicked="#handleReplyAllButtonClick"
+                                        mnemonicParsing="false" GridPane.columnIndex="1">
+                                    <graphic>
+                                        <FontAwesomeIcon glyphName="MAIL_REPLY_ALL" size="12pt"/>
+                                    </graphic>
+                                    <tooltip>
+                                        <Tooltip text="Rispondi a tutti"/>
+                                    </tooltip>
+                                </Button>
+                                <Button fx:id="forwardButton"
+                                        onMouseClicked="#handleForwardButtonClick"
+                                        mnemonicParsing="false" GridPane.columnIndex="2">
+                                    <graphic>
+                                        <FontAwesomeIcon glyphName="MAIL_FORWARD" size="12pt"/>
+                                    </graphic>
+                                    <tooltip>
+                                        <Tooltip text="Inoltra"/>
+                                    </tooltip>
+
+                                </Button>
+                                <Button fx:id="deleteButton"
+                                        onMouseClicked="#handleDeleteButtonClick"
+                                        mnemonicParsing="false" GridPane.columnIndex="3">
+                                    <graphic>
+                                        <FontAwesomeIcon glyphName="TRASH" size="12pt"/>
+                                    </graphic>
+                                    <tooltip>
+                                        <Tooltip text="Elimina"/>
+                                    </tooltip>
+                                </Button>
+                            </children>
+                            <columnConstraints>
+                                <ColumnConstraints halignment="CENTER" prefWidth="100.0"/>
+                                <ColumnConstraints halignment="CENTER" prefWidth="100.0"/>
+                                <ColumnConstraints halignment="CENTER" prefWidth="100.0"/>
+                                <ColumnConstraints halignment="CENTER" prefWidth="100.0"/>
+                            </columnConstraints>
+                            <rowConstraints>
+                                <RowConstraints prefHeight="30.0" valignment="CENTER"
+                                                vgrow="SOMETIMES"/>
+                            </rowConstraints>
+                        </GridPane>
+                    </children>
+                </AnchorPane>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0"
+                            GridPane.rowIndex="1">
+                    <children>
+                        <ScrollPane fitToWidth="true" hbarPolicy="NEVER" layoutX="-1.0"
+                                    layoutY="36.0" prefViewportHeight="651.0"
+                                    prefViewportWidth="622.060546875"
+                                    AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="-1.0"
+                                    AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="-1.0">
+                            <content>
+                                <Label fx:id="textNode"
+                                       alignment="TOP_LEFT" depthTest="DISABLE" layoutX="84.0"
+                                       layoutY="83.0" maxWidth="1.7976931348623157E308"
+                                       wrapText="true" AnchorPane.leftAnchor="5.0"
+                                       AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+                                    <opaqueInsets>
+                                        <Insets/>
+                                    </opaqueInsets>
+                                    <padding>
+                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                                    </padding>
+                                </Label>
+                            </content>
+                        </ScrollPane>
+                    </children>
+                </AnchorPane>
+            </children>
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0"/>
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints vgrow="NEVER"/>
+                <RowConstraints minHeight="10.0" vgrow="SOMETIMES"/>
+            </rowConstraints>
+        </GridPane>
+    </content>
+</Tab>
