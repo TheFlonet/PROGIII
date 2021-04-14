@@ -3,12 +3,13 @@ package progiii.client.concurrency.task;
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
 import progiii.client.concurrency.Helper;
+import progiii.client.controller.MainController;
 import progiii.common.data.Email;
 import progiii.common.network.ResponseType;
-import progiii.common.network.request.CheckEmail;
+import progiii.common.network.request.CheckEmailReq;
 import progiii.common.network.request.SendReq;
-import progiii.common.network.response.EmailExistence;
-import progiii.common.network.response.Error;
+import progiii.common.network.response.EmailExistenceRes;
+import progiii.common.network.response.ErrorRes;
 import progiii.common.network.response.Response;
 import progiii.common.util.ValidatorCollector;
 
@@ -40,14 +41,14 @@ public class SendTask implements Runnable {
             new Alert(Alert.AlertType.ERROR, msg).show();
         };
 
-        CheckEmail existenceRequest = new CheckEmail(toSend.getFrom(), recipients.getEmails(true));
+        CheckEmailReq existenceRequest = new CheckEmailReq(toSend.getFrom(), recipients.getEmails(true));
         Callable<Optional<Response>> callable = Helper.prepare(existenceRequest);
         Future<Optional<Response>> task = executorService.submit(callable);
         Optional<Response> response = waitResponse(task);
-        EmailExistence existenceResponse = null;
+        EmailExistenceRes existenceResponse;
 
         try {
-            existenceResponse = (EmailExistence) response.orElseThrow();
+            existenceResponse = (EmailExistenceRes) response.orElseThrow();
         } catch (NoSuchElementException e) {
             Platform.runLater(() -> error.accept("Internal error"));
             e.printStackTrace();
@@ -55,7 +56,7 @@ public class SendTask implements Runnable {
         }
 
         System.out.println(existenceResponse);
-        EmailExistence finalResponse = existenceResponse;
+        EmailExistenceRes finalResponse = existenceResponse;
         String missEmails = existenceResponse.getResult().keySet().stream().filter(email -> !finalResponse.getResult()
                 .get(email)).collect(Collectors.joining("\n\t"));
 
@@ -78,12 +79,12 @@ public class SendTask implements Runnable {
 
         if (sendResponse.getType() == ResponseType.SEND)
             Platform.runLater(() -> {
-                MainController.getInstance().closeEmailTab(toSend, false);
+                MainController.getInstance().closePopup(toSend, false);
                 sendAlert.close();
                 new Alert(Alert.AlertType.INFORMATION, "Email successfully sent").show();
             });
         else {
-            Error errorResponse = (Error) sendResponse;
+            ErrorRes errorResponse = (ErrorRes) sendResponse;
             Platform.runLater(() -> error.accept(errorResponse.getStatus()));
         }
     }

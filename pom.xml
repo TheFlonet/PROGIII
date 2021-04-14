@@ -59,7 +59,7 @@
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>0.0.5</version>
                 <configuration>
-                    <mainClass>progiii.server.view.MailServer</mainClass>
+                    <mainClass>progiii.Launcher</mainClass>
                 </configuration>
             </plugin>
         </plugins>

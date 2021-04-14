@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="170.0" prefWidth="370.0"
+            xmlns="http://javafx.com/javafx/10.0.2-internal" fx:controller="client.controllers.AccessScreenController">
+    <children>
+        <Button fx:id="accessButton" layoutX="149.0" layoutY="120.4" mnemonicParsing="false"
+                onMouseClicked="#accessButtonClicked" text="Accedi" AnchorPane.bottomAnchor="24.0"
+                AnchorPane.leftAnchor="149.0" AnchorPane.rightAnchor="149.8"/>
+        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="161.0" layoutY="6.0" text="Ciao"
+               AnchorPane.leftAnchor="161.8" AnchorPane.rightAnchor="161.8" AnchorPane.topAnchor="6.0">
+            <font>
+                <Font name="Corbel" size="22.0"/>
+            </font>
+        </Label>
+        <Label layoutX="17.0" layoutY="32.0" text="Per accedere alla casella, inserisci un'email."
+               textAlignment="CENTER" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="16.19999999999999"
+               AnchorPane.topAnchor="32.0">
+            <font>
+                <Font name="Corbel" size="19.0"/>
+            </font>
+        </Label>
+        <TextField fx:id="emailField" layoutX="57.0" layoutY="72.0" prefHeight="26.0" prefWidth="256.0"
+                   AnchorPane.leftAnchor="57.0" AnchorPane.rightAnchor="57.0"/>
+        <Label fx:id="statusLabel" alignment="CENTER" layoutX="170.0" layoutY="148.0" maxWidth="360.0" prefHeight="18.0"
+               text="Stato" textAlignment="CENTER" visible="false" AnchorPane.bottomAnchor="4.0"
+               AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0"/>
+    </children>
+</AnchorPane>

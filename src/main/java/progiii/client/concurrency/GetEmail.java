@@ -3,12 +3,14 @@ package progiii.client.concurrency;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.control.Alert;
+import javafx.scene.paint.Color;
+import progiii.client.controller.MainController;
+import progiii.client.model.Model;
 import progiii.common.network.request.PullReq;
 import progiii.common.network.request.Request;
 import progiii.common.data.Email;
 import progiii.common.network.NetworkConfig;
 
-import java.awt.*;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -21,8 +23,6 @@ import java.util.concurrent.*;
 import java.util.stream.Collectors;
 
 import progiii.common.network.response.NewEmailRes;
-import progiii.server.controller.MainController;
-import progiii.server.model.Model;
 
 public class GetEmail implements Runnable {
     private final ScheduledExecutorService executorService;
@@ -41,7 +41,7 @@ public class GetEmail implements Runnable {
              ObjectOutputStream out = new ObjectOutputStream(s.getOutputStream());
              ObjectInputStream in = new ObjectInputStream(s.getInputStream())) {
 
-            Set<Integer> localIds = Model.getInstance().getEmails().stream()
+            Set<Integer> localIds = Model.getInstance().getReceivedEmails().stream()
                     .map(Email::getId).collect(Collectors.toCollection(HashSet::new));
             Request request = new PullReq(emailAddr.getValue(), localIds);
             out.writeObject(request);
@@ -51,9 +51,9 @@ public class GetEmail implements Runnable {
 
             int tries = resetTries();
             FutureTask<Void> task = new FutureTask<>(() -> {
-                Model.getInstance().getEmails().addAll(response.getEmailSet());
+                Model.getInstance().getReceivedEmails().addAll(response.getEmailSet());
                 if (response.getEmailSet().size() > 0)
-                    MainController.getInstance.showStatusMsg(String.format("%d new emails", response.getEmailSet().size()), Color.BLACK);
+                    MainController.getInstance().showStatusMsg(String.format("%d new emails", response.getEmailSet().size()), Color.BLACK);
                 else if (tries != 0)
                     MainController.getInstance().showStatusMsg("Connection restored. No new emails received", Color.BLACK);
                 return null;
@@ -108,6 +108,7 @@ public class GetEmail implements Runnable {
                 return true;
             } else throw new IllegalStateException("Pull service isn't initialized");
         }
+        return false;
     }
 
     private int resetTries() {
