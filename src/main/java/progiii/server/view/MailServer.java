@@ -12,6 +12,7 @@ import progiii.server.util.DataManager;
 
 import java.io.IOException;
 import java.net.ServerSocket;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Map;
 import java.util.Objects;
@@ -23,7 +24,7 @@ public class MailServer extends Application {
     private static final int MAX_CONNECTION_HANDLERS = 5;
     private static ServerSocket serverSocket;
     private static DataManager dataManager;
-    Future<Void> listener;
+    private Future<Void> listener;
     private ExecutorService executorService;
 
     public static void main(String[] args) {
@@ -40,27 +41,16 @@ public class MailServer extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        Map<String, String> runtimeParams = getParameters().getNamed();
-        if (!runtimeParams.containsKey("datapath"))
-            throw new IllegalArgumentException("Path to email folder is required");
-        dataManager = new DataManager(Paths.get(runtimeParams.get("datapath")));
-        int CONNECTION_HANDLERS;
-        if (!runtimeParams.containsKey("max-handlers"))
-            CONNECTION_HANDLERS = MAX_CONNECTION_HANDLERS;
-        else {
-            String handlers = runtimeParams.get("max-handlers");
-            CONNECTION_HANDLERS = (handlers != null && Integer.parseInt(handlers) > 0) ?
-                    Integer.parseInt(handlers) : MAX_CONNECTION_HANDLERS;
-        }
+        dataManager = new DataManager(Paths.get(String.valueOf(getClass().getResource("/progiii/server/data/"))));
         new Model();
-        executorService = Executors.newFixedThreadPool(CONNECTION_HANDLERS);
+        executorService = Executors.newFixedThreadPool(MAX_CONNECTION_HANDLERS);
         listener = executorService.submit(new ServerListener(executorService), null);
         initWindow();
     }
 
     private void initWindow() throws IOException {
         Stage stage = new Stage();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("progiii/server/main"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/progiii/server/main.fxml"));
         Scene scene = new Scene(loader.load());
         stage.setOnCloseRequest((event) -> {
             try {
@@ -72,7 +62,7 @@ public class MailServer extends Application {
             executorService.shutdown();
             Platform.exit();
         });
-        stage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("progiii/server/icon.png"))));
+        stage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/progiii/server/icon.png"))));
         stage.setTitle("Server");
         stage.setScene(scene);
         stage.sizeToScene();

@@ -6,6 +6,9 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 import progiii.client.concurrency.Helper;
+import progiii.client.controller.LoginController;
+import progiii.client.model.Model;
+import progiii.client.view.MailClient;
 import progiii.common.network.ResponseType;
 import progiii.common.network.request.AuthReq;
 import progiii.common.network.request.CheckEmailReq;
@@ -20,11 +23,11 @@ import java.util.Optional;
 import java.util.concurrent.*;
 import java.util.function.Consumer;
 
-public class AccessTask implements Runnable {
+public class LoginTask implements Runnable {
     private final ScheduledExecutorService executorService;
-    private final AccessController controller;
+    private final LoginController controller;
 
-    public AccessTask(ScheduledExecutorService executorService, AccessController controller) {
+    public LoginTask(ScheduledExecutorService executorService, LoginController controller) {
         this.executorService = executorService;
         this.controller = controller;
     }
@@ -102,13 +105,12 @@ public class AccessTask implements Runnable {
                     NewEmailRes newEmailResponse = (NewEmailRes) response2;
                     Platform.runLater(() -> {
                         controller.hideMsg();
-                        Model model = model.getInstance();
-                        model.getEmails().addAll(newEmailResponse.getEmailSet());
+                        Model model = Model.getInstance();
+                        model.getReceivedEmails().addAll(newEmailResponse.getEmailSet());
                         model.setEmail(email);
-                        model.startPullService();
-
+                        model.startPullReq();
                         MailClient client = MailClient.getInstance();
-                        client.setWindowTitle(email);
+                        client.setMainTitle(email);
                         client.hideLogin();
                         client.showMain();
                     });
@@ -134,7 +136,7 @@ public class AccessTask implements Runnable {
         }
     }
 
-    private Optional<Response> waitAnswer(int timeout, Future<Optional<Response>> task) {
+    private Optional<Response> waitResponse(int timeout, Future<Optional<Response>> task) {
         Consumer<String> error = (msg) -> {
             controller.showMsg(msg);
             controller.toggleInterface(true);

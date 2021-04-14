@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!--suppress JavaFxDefaultTag -->
-
-<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <BorderPane minHeight="630.0" minWidth="800.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.2-internal"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.MainController">
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="progiii.client.controller.MainController">
     <center>
         <SplitPane dividerPositions="0.20551378446115287" prefHeight="421.0" prefWidth="800.0"
                    BorderPane.alignment="CENTER">
@@ -32,35 +29,18 @@
                                 <RowConstraints minHeight="30.0" vgrow="SOMETIMES"/>
                             </rowConstraints>
                             <children>
-                                <Button mnemonicParsing="false" onMouseClicked="#openNewEmailTab" text="Scrivi">
-                                    <graphic>
-                                        <FontAwesomeIcon glyphName="FILE" size="12pt"/>
-                                    </graphic>
-                                    <tooltip>
-                                        <Tooltip text="Nuova Email"/>
-                                    </tooltip>
-                                    <opaqueInsets>
-                                        <Insets/>
-                                    </opaqueInsets>
-                                </Button>
-                                <Button mnemonicParsing="false" onMouseClicked="#logoutButtonClicked" text="Logout"
-                                        GridPane.columnIndex="1">
-                                    <graphic>
-                                        <FontAwesomeIcon glyphName="SIGN_OUT" size="12pt"/>
-                                    </graphic>
-                                    <tooltip>
-                                        <Tooltip text="Logout"/>
-                                    </tooltip>
-                                </Button>
+                                <Button mnemonicParsing="false" onMouseClicked="#openEmailTab" text="Scrivi"/>
+                                <Button mnemonicParsing="false" onMouseClicked="#logoutClick" text="Logout"
+                                        GridPane.columnIndex="1"/>
                             </children>
                         </GridPane>
-                        <ListView fx:id="receivedEmailsList" editable="true" maxHeight="1.7976931348623157E308"
-                                  onKeyReleased="#handleEmailListKeyboardTyped"
-                                  onMouseClicked="#handleEmailListMouseClick" GridPane.hgrow="ALWAYS"
+                        <ListView fx:id="receivedEmails" editable="true" maxHeight="1.7976931348623157E308"
+                                  onKeyReleased="#handleEmailTyped"
+                                  onMouseClicked="#handleEmailClick" GridPane.hgrow="ALWAYS"
                                   GridPane.rowIndex="1"/>
                     </children>
                 </GridPane>
-                <TabPane fx:id="emailTabPane" minHeight="598.0" minWidth="630.0" prefHeight="200.0" prefWidth="200.0"
+                <TabPane fx:id="tabPane" minHeight="598.0" minWidth="630.0" prefHeight="200.0" prefWidth="200.0"
                          tabClosingPolicy="ALL_TABS"/>
             </items>
         </SplitPane>
