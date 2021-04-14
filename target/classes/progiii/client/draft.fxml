@@ -3,74 +3,62 @@
 <?import javafx.scene.text.Font?>
 <Tab fx:id="tab" fx:controller="progiii.client.controller.NewEmailController"
      xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-    <content>
+    <GridPane>
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0"/>
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints vgrow="NEVER"/>
+            <RowConstraints minHeight="10.0" vgrow="SOMETIMES"/>
+        </rowConstraints>
         <GridPane>
-            <children>
-                <GridPane>
-                    <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0"/>
-                        <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="NEVER"/>
-                    </columnConstraints>
-                    <rowConstraints>
-                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES"/>
-                    </rowConstraints>
-                    <children>
-                        <AnchorPane minHeight="110.0" minWidth="0.0" prefHeight="110.0" prefWidth="160.0">
-                            <children>
-                                <Label fx:id="fromNode" layoutX="40.0" layoutY="50.0" AnchorPane.leftAnchor="40.0"
-                                       AnchorPane.topAnchor="50.0"/>
-                                <Label layoutX="22.0" layoutY="80.0" text="A:" AnchorPane.leftAnchor="22.0"
-                                       AnchorPane.topAnchor="80.0"/>
-                                <Label layoutX="14.0" layoutY="49.0" text="Da: " AnchorPane.leftAnchor="14.0"
-                                       AnchorPane.topAnchor="50.0"/>
-                                <TextField fx:id="subjectNode" layoutX="14.0" layoutY="14.0" minHeight="31.0"
-                                           minWidth="164.0" promptText="Oggetto" AnchorPane.leftAnchor="14.0"
-                                           AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
-                                    <font>
-                                        <Font name="System Bold" size="15.0"/>
-                                    </font>
-                                </TextField>
-                                <TextField fx:id="toNode" layoutX="40.0" layoutY="75.0" prefHeight="31.0"
-                                           promptText="Destinatario" AnchorPane.leftAnchor="40.0"
-                                           AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="75.0"/>
-                            </children>
-                        </AnchorPane>
-                        <GridPane alignment="CENTER_RIGHT" hgap="5.0" prefHeight="21.0" prefWidth="80.0" vgap="5.0"
-                                  GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="NEVER"
-                                  GridPane.valignment="TOP" GridPane.vgrow="NEVER">
-                            <children>
-                                <Button text="Send" mnemonicParsing="false"
-                                        onMouseClicked="#handleSend">
-                                </Button>
-                                <Button text="Delete" mnemonicParsing="false"
-                                        onMouseClicked="#handleDeleteClick" GridPane.columnIndex="1">
-                                </Button>
-                            </children>
-                            <columnConstraints>
-                                <ColumnConstraints halignment="CENTER" prefWidth="100.0"/>
-                                <ColumnConstraints halignment="CENTER" prefWidth="100.0"/>
-                            </columnConstraints>
-                            <rowConstraints>
-                                <RowConstraints valignment="CENTER" vgrow="NEVER"/>
-                            </rowConstraints>
-                        </GridPane>
-                    </children>
-                </GridPane>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" GridPane.rowIndex="1">
-                    <children>
-                        <TextArea fx:id="textNode" layoutX="58.0" layoutY="78.0" prefHeight="200.0" prefWidth="200.0"
-                                  AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="-1.0"
-                                  AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="-1.0"/>
-                    </children>
-                </AnchorPane>
-            </children>
             <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0"/>
+                <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="NEVER"/>
             </columnConstraints>
             <rowConstraints>
-                <RowConstraints vgrow="NEVER"/>
                 <RowConstraints minHeight="10.0" vgrow="SOMETIMES"/>
             </rowConstraints>
+            <AnchorPane minHeight="110.0" minWidth="0.0" prefHeight="110.0" prefWidth="160.0">
+                <Label fx:id="fromNode" layoutX="40.0" layoutY="50.0" AnchorPane.leftAnchor="40.0"
+                       AnchorPane.topAnchor="50.0"/>
+                <Label layoutX="25.0" layoutY="80.0" text="To:" AnchorPane.leftAnchor="25.0"
+                       AnchorPane.topAnchor="80.0"/>
+                <Label layoutX="15.0" layoutY="50.0" text="From: " AnchorPane.leftAnchor="15.0"
+                       AnchorPane.topAnchor="50.0"/>
+                <TextField fx:id="subjectNode" layoutX="15.0" layoutY="15.0" minHeight="30.0"
+                           minWidth="165.0" promptText="Subject" AnchorPane.leftAnchor="15.0"
+                           AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0">
+                    <font>
+                        <Font name="System Bold" size="15.0"/>
+                    </font>
+                </TextField>
+                <TextField fx:id="toNode" layoutX="40.0" layoutY="75.0" prefHeight="30.0"
+                           promptText="Recipient" AnchorPane.leftAnchor="40.0"
+                           AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="75.0"/>
+            </AnchorPane>
+            <GridPane alignment="CENTER_RIGHT" hgap="5.0" prefHeight="21.0" prefWidth="80.0" vgap="5.0"
+                      GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="NEVER"
+                      GridPane.valignment="TOP" GridPane.vgrow="NEVER">
+                <columnConstraints>
+                    <ColumnConstraints halignment="CENTER" prefWidth="100.0"/>
+                    <ColumnConstraints halignment="CENTER" prefWidth="100.0"/>
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints valignment="CENTER" vgrow="NEVER"/>
+                </rowConstraints>
+                <Button text="Send" mnemonicParsing="false"
+                        onMouseClicked="#handleSend">
+                </Button>
+                <Button text="Delete" mnemonicParsing="false"
+                        onMouseClicked="#handleDeleteClick" GridPane.columnIndex="1">
+                </Button>
+            </GridPane>
         </GridPane>
-    </content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" GridPane.rowIndex="1">
+            <TextArea fx:id="textNode" layoutX="58.0" layoutY="78.0" prefHeight="200.0" prefWidth="200.0"
+                      AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="-1.0"
+                      AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="-1.0"/>
+        </AnchorPane>
+    </GridPane>
 </Tab>

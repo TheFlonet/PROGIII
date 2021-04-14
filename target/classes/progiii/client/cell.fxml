@@ -6,29 +6,25 @@
 <?import javafx.scene.text.*?>
 
 <!-- ATTENZIONE!!!!! NON modificare la prefWidth!!! DEVE RIMANERE 100.0-->
-<VBox fx:id="container" fillWidth="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
-      minHeight="-Infinity" minWidth="-Infinity" prefWidth="100.0" xmlns="http://javafx.com/javafx/10.0.2-internal"
-      xmlns:fx="http://javafx.com/fxml/1">
+
+<VBox fx:id="container" fillWidth="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefWidth="100.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <Label fx:id="subject" alignment="TOP_LEFT" nodeOrientation="LEFT_TO_RIGHT"
-               text="Oggetto Email Lungo Lungo Lungo Lungo Lungo" textOverrun="WORD_ELLIPSIS">
+        <Label fx:id="subject" alignment="TOP_LEFT" nodeOrientation="LEFT_TO_RIGHT" text="Extremely long text to test cell field in UI window" textOverrun="WORD_ELLIPSIS">
             <font>
-                <Font name="System Bold" size="15.0"/>
+                <Font name="System Bold" size="15.0" />
             </font>
             <VBox.margin>
-                <Insets/>
+                <Insets />
             </VBox.margin>
         </Label>
         <Label fx:id="from" text="example@test.com">
             <VBox.margin>
-                <Insets/>
+                <Insets />
             </VBox.margin>
         </Label>
-        <Label fx:id="text" maxHeight="50.0"
-               text="Testo della mail. Continua ed è abbastanza lungo da non essere leggibile completamente se non si apre la mail. Se leggi questo messaggio, c'è qualcosa che non funziona con il layout"
-               textOverrun="WORD_ELLIPSIS" wrapText="true">
+        <Label fx:id="text" maxHeight="50.0" text="Toooooooooooooooooooooooooooooooooo long text to be shown in a simple cell, open a tab!" textOverrun="WORD_ELLIPSIS" wrapText="true">
             <VBox.margin>
-                <Insets/>
+                <Insets />
             </VBox.margin>
         </Label>
     </children>

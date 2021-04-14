@@ -1,60 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<BorderPane minHeight="630.0" minWidth="800.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.2-internal"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="progiii.client.controller.MainController">
+
+<BorderPane minHeight="630.0" minWidth="800.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="progiii.client.controller.MainController">
     <center>
-        <SplitPane dividerPositions="0.20551378446115287" prefHeight="421.0" prefWidth="800.0"
-                   BorderPane.alignment="CENTER">
-            <items>
-                <GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="160.0"
-                          SplitPane.resizableWithParent="false">
+        <SplitPane dividerPositions="0.20551378446115287" prefHeight="421.0" prefWidth="800.0" BorderPane.alignment="CENTER">
+            <GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="160.0" SplitPane.resizableWithParent="false">
+                <columnConstraints>
+                    <ColumnConstraints halignment="CENTER" maxWidth="1.7976931348623157E308" minWidth="10.0" />
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints valignment="CENTER" />
+                    <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="455.0" vgrow="ALWAYS" />
+                </rowConstraints>
+                <GridPane>
                     <columnConstraints>
-                        <ColumnConstraints halignment="CENTER" maxWidth="1.7976931348623157E308" minWidth="10.0"/>
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" />
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" />
                     </columnConstraints>
                     <rowConstraints>
-                        <RowConstraints valignment="CENTER"/>
-                        <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="455.0"
-                                        vgrow="ALWAYS"/>
+                        <RowConstraints minHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
-                    <children>
-                        <GridPane>
-                            <columnConstraints>
-                                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0"/>
-                                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0"/>
-                            </columnConstraints>
-                            <rowConstraints>
-                                <RowConstraints minHeight="30.0" vgrow="SOMETIMES"/>
-                            </rowConstraints>
-                            <children>
-                                <Button mnemonicParsing="false" onMouseClicked="#openEmailTab" text="Scrivi"/>
-                                <Button mnemonicParsing="false" onMouseClicked="#logoutClick" text="Logout"
-                                        GridPane.columnIndex="1"/>
-                            </children>
-                        </GridPane>
-                        <ListView fx:id="receivedEmails" editable="true" maxHeight="1.7976931348623157E308"
-                                  onKeyReleased="#handleEmailTyped"
-                                  onMouseClicked="#handleEmailClick" GridPane.hgrow="ALWAYS"
-                                  GridPane.rowIndex="1"/>
-                    </children>
+                    <Button mnemonicParsing="false" onMouseClicked="#openEmailTab" text="Write" />
+                    <Button mnemonicParsing="false" onMouseClicked="#logoutClick" text="Logout" GridPane.columnIndex="1" />
                 </GridPane>
-                <TabPane fx:id="tabPane" minHeight="598.0" minWidth="630.0" prefHeight="200.0" prefWidth="200.0"
-                         tabClosingPolicy="ALL_TABS"/>
-            </items>
+                <ListView fx:id="receivedEmails" editable="true" maxHeight="1.7976931348623157E308" onKeyReleased="#handleEmailTyped" onMouseClicked="#handleEmailClick" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" />
+            </GridPane>
+            <TabPane fx:id="tabPane" minHeight="598.0" minWidth="630.0" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="ALL_TABS" />
         </SplitPane>
     </center>
     <bottom>
         <AnchorPane BorderPane.alignment="CENTER">
-            <children>
-                <Label fx:id="status" alignment="TOP_RIGHT" text="Barra di stato" textAlignment="RIGHT"
-                       AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="0.0">
-                    <padding>
-                        <Insets bottom="2.0" left="2.0" right="2.0" top="2.0"/>
-                    </padding>
-                </Label>
-            </children>
+            <Label fx:id="status" alignment="TOP_RIGHT" text="StatusBar" textAlignment="RIGHT" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="0.0">
+                <padding>
+                    <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                </padding>
+            </Label>
         </AnchorPane>
     </bottom>
 </BorderPane>
