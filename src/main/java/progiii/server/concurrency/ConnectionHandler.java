@@ -2,12 +2,7 @@ package progiii.server.concurrency;
 
 import progiii.common.data.Email;
 import progiii.common.network.request.*;
-import progiii.common.network.response.DeleteRes;
-import progiii.common.network.response.EmailExistenceRes;
-import progiii.common.network.response.ErrorRes;
-import progiii.common.network.response.NewEmailRes;
-import progiii.common.network.response.Response;
-import progiii.common.network.response.SendRes;
+import progiii.common.network.response.*;
 import progiii.common.util.ClosableRes;
 import progiii.common.util.StringUtils;
 import progiii.common.util.ValidatorCollector;
@@ -15,7 +10,9 @@ import progiii.server.model.Model;
 import progiii.server.util.log.Event;
 import progiii.server.view.MailServer;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.HashMap;
 import java.util.HashSet;

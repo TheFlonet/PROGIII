@@ -1,6 +1,5 @@
 package progiii.client.view;
 
-import com.sun.javafx.font.PrismFontLoader;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.BoundingBox;
@@ -10,7 +9,6 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import progiii.client.concurrency.GetEmail;

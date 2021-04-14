@@ -3,8 +3,6 @@ package progiii;
 import progiii.client.view.MailClient;
 import progiii.server.view.MailServer;
 
-import java.time.temporal.TemporalUnit;
-
 public class Launcher {
     public static void main(String[] args) throws InterruptedException {
         String[] serverArgs = {

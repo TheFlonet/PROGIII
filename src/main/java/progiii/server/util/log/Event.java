@@ -1,7 +1,7 @@
 package progiii.server.util.log;
 
-import progiii.common.network.request.Request;
 import progiii.common.network.RequestType;
+import progiii.common.network.request.Request;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;

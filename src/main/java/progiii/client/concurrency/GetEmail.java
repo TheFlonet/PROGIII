@@ -6,10 +6,11 @@ import javafx.scene.control.Alert;
 import javafx.scene.paint.Color;
 import progiii.client.controller.MainController;
 import progiii.client.model.Model;
-import progiii.common.network.request.PullReq;
-import progiii.common.network.request.Request;
 import progiii.common.data.Email;
 import progiii.common.network.NetworkConfig;
+import progiii.common.network.request.PullReq;
+import progiii.common.network.request.Request;
+import progiii.common.network.response.NewEmailRes;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -21,8 +22,6 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.*;
 import java.util.stream.Collectors;
-
-import progiii.common.network.response.NewEmailRes;
 
 public class GetEmail implements Runnable {
     private final ScheduledExecutorService executorService;

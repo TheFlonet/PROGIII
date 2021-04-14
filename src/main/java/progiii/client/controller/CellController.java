@@ -8,7 +8,6 @@ import javafx.scene.control.ListCell;
 import progiii.common.data.Email;
 
 import java.io.IOException;
-import java.text.Normalizer;
 
 public class CellController extends ListCell<Email> {
     @FXML
