@@ -46,7 +46,7 @@ public class LoginTask implements Runnable {
         Future<Optional<Response>> futureTask = executorService.submit(check);
         Response response;
         try {
-            response = waitResponse(5, futureTask).orElseThrow();
+            response = waitResponse(futureTask).orElseThrow();
         } catch (NoSuchElementException e) {
             return;
         }
@@ -88,24 +88,22 @@ public class LoginTask implements Runnable {
                 Future<Optional<Response>> futureTask2 = executorService.submit(auth);
                 Response response2;
                 try {
-                    response2 = waitResponse(5, futureTask2).orElseThrow();
+                    response2 = waitResponse(futureTask2).orElseThrow();
                 } catch (NoSuchElementException e) {
                     return;
                 }
 
                 ResponseType type2 = response2.getType();
-                if (type2 == ResponseType.ERROR) {
-                    ErrorRes finalResponse2 = (ErrorRes) response2;
+                if (type2 == ResponseType.ERROR)
                     Platform.runLater(() -> {
-                        controller.showMsg(String.format("Error %s", finalResponse2.getStatus()));
+                        controller.showMsg(String.format("Error %s", response2.getStatus()));
                         controller.toggleInterface(true);
                     });
-                } else if (type2 == ResponseType.NEW_EMAILS) {
-                    NewEmailRes newEmailResponse = (NewEmailRes) response2;
+                else if (type2 == ResponseType.NEW_EMAILS)
                     Platform.runLater(() -> {
                         controller.hideMsg();
                         Model model = Model.getInstance();
-                        model.getReceivedEmails().addAll(newEmailResponse.getEmailSet());
+                        model.getReceivedEmails().addAll(((NewEmailRes) response2).getEmailSet());
                         model.setEmail(email);
                         model.startPullReq();
                         MailClient client = MailClient.getInstance();
@@ -113,7 +111,7 @@ public class LoginTask implements Runnable {
                         client.hideLogin();
                         client.showMain();
                     });
-                } else {
+                else {
                     Platform.runLater(() -> {
                         controller.showMsg("Internal error");
                         controller.toggleInterface(true);
@@ -135,11 +133,11 @@ public class LoginTask implements Runnable {
         }
     }
 
-    private Optional<Response> waitResponse(int timeout, Future<Optional<Response>> task) {
+    private Optional<Response> waitResponse(Future<Optional<Response>> task) {
         Consumer<String> error = (msg) -> {
             controller.showMsg(msg);
             controller.toggleInterface(true);
         };
-        return Helper.waitForAnswer(timeout, task, "Access", error, error);
+        return Helper.waitForAnswer(5, task, "Access", error, error);
     }
 }

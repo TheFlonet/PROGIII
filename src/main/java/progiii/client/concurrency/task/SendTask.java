@@ -25,7 +25,7 @@ public class SendTask implements Runnable {
     private final ScheduledExecutorService executorService;
     private final Email toSend;
     private final Alert sendAlert;
-    private ValidatorCollector recipients;
+    private final ValidatorCollector recipients;
 
     public SendTask(ScheduledExecutorService executorService, Email toSend, Alert sendAlert, ValidatorCollector recipients) {
         this.executorService = executorService;
@@ -68,7 +68,7 @@ public class SendTask implements Runnable {
         Callable<Optional<Response>> sendRequest = Helper.prepare(new SendReq(toSend));
         Future<Optional<Response>> future = executorService.submit(sendRequest);
         Optional<Response> response2 = waitResponse(future);
-        Response sendResponse = null;
+        Response sendResponse;
         try {
             sendResponse = response2.orElseThrow();
         } catch (NoSuchElementException e) {
@@ -83,10 +83,7 @@ public class SendTask implements Runnable {
                 sendAlert.close();
                 new Alert(Alert.AlertType.INFORMATION, "Email successfully sent").show();
             });
-        else {
-            ErrorRes errorResponse = (ErrorRes) sendResponse;
-            Platform.runLater(() -> error.accept(errorResponse.getStatus()));
-        }
+        else Platform.runLater(() -> error.accept(sendResponse.getStatus()));
     }
 
     private Optional<Response> waitResponse(Future<Optional<Response>> optionalFuture) {

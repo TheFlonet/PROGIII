@@ -19,7 +19,6 @@ public class IdHandler implements Serializable {
         this.idCounter = new AtomicInteger(startValue);
     }
 
-    //todo capire se serve dichiarare il metodo synchronized
     public int getAndIncrement() {
         return idCounter.getAndIncrement();
     }

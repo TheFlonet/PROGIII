@@ -22,14 +22,10 @@ public class MainController implements Initializable {
     @FXML
     public ListView<Email> receivedEmails;
     @FXML
-    public ListView<String> contacts;
-    @FXML
     public TabPane tabPane;
     @FXML
-    public Menu menu;
-    @FXML
     public Label status;
-    private Map<Email, TabController> openEmails = new HashMap<>();
+    private final Map<Email, TabController> openEmails = new HashMap<>();
     private Model model;
     private URL receivedStructure;
     private URL draftStructure;

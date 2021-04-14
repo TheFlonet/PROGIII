@@ -20,7 +20,6 @@ public class Email implements Serializable, Comparable<Email> {
     private transient SimpleStringProperty to;
     private transient SimpleStringProperty subject;
     private transient SimpleStringProperty text;
-    // todo: aggiungere una label per la data nella grafica dell'email ricevuta.
     private transient SimpleObjectProperty<Date> date;
 
     private Email() {
@@ -43,16 +42,8 @@ public class Email implements Serializable, Comparable<Email> {
         this.id.set(id);
     }
 
-    public SimpleIntegerProperty idProperty() {
-        return id;
-    }
-
     public String getFrom() {
         return from.get();
-    }
-
-    public void setFrom(String from) {
-        this.from.set(from);
     }
 
     public SimpleStringProperty fromProperty() {
@@ -63,20 +54,12 @@ public class Email implements Serializable, Comparable<Email> {
         return to.get();
     }
 
-    public void setTo(String to) {
-        this.to.set(to);
-    }
-
     public SimpleStringProperty toProperty() {
         return to;
     }
 
     public String getSubject() {
         return subject.get();
-    }
-
-    public void setSubject(String subject) {
-        this.subject.set(subject);
     }
 
     public SimpleStringProperty subjectProperty() {
@@ -103,11 +86,6 @@ public class Email implements Serializable, Comparable<Email> {
         this.date.set(date);
     }
 
-    public SimpleObjectProperty<Date> dateProperty() {
-        return date;
-    }
-
-    // TODO capire se va bene questo toString o copiare l'altro
     @Override
     public String toString() {
         return "Email{" +
@@ -118,10 +96,6 @@ public class Email implements Serializable, Comparable<Email> {
                 ", text=" + text +
                 ", date=" + date +
                 '}';
-    }
-
-    public String formattedDate() {
-        return DATE_FORMAT.format(date.get());
     }
 
     @Override
@@ -179,7 +153,7 @@ public class Email implements Serializable, Comparable<Email> {
             jsonWriter.name("text");
             jsonWriter.value(email.getText());
             jsonWriter.name("date");
-            jsonWriter.value(email.getDate().getTime()); //date as long
+            jsonWriter.value(email.getDate().getTime());
             jsonWriter.endObject();
         }
 

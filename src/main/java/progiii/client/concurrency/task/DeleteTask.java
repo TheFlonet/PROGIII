@@ -33,28 +33,23 @@ public class DeleteTask implements Runnable {
     public void run() {
         FutureTask<Boolean> pullDelayer = new FutureTask<>(() -> Model.getInstance().pausePullReq(2));
         Platform.runLater(pullDelayer);
-
         try {
             if (!pullDelayer.get())
                 Thread.sleep(2000);
         } catch (InterruptedException | ExecutionException e) {
             throw new RuntimeException(e);
         }
-
         Callable<Optional<Response>> delete = Helper.prepare(new DeleteReq(owner, toDelete));
         Future<Optional<Response>> futureResponse = executorService.submit(delete);
-
         Response response;
         try {
             response = waitResponse(5, futureResponse).orElseThrow();
         } catch (NoSuchElementException e) {
             return;
         }
-
-        if (response.getType() == ResponseType.ERROR) {
-            ErrorRes finalResponse = (ErrorRes) response;
-            Platform.runLater(() -> new Alert(Alert.AlertType.WARNING, String.format("Error while cancelling emails %s", finalResponse.getStatus())).show());
-        } else if (response.getType() == ResponseType.DELETE) {
+        if (response.getType() == ResponseType.ERROR)
+            Platform.runLater(() -> new Alert(Alert.AlertType.WARNING, String.format("Error while cancelling emails %s", response.getStatus())).show());
+        else if (response.getType() == ResponseType.DELETE) {
             System.out.println(response);
             Platform.runLater(() -> {
                 MainController.getInstance().showStatusMsg("Emails deleted", Color.GREEN);
