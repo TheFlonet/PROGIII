@@ -23,7 +23,10 @@ public class LoginController {
     }
 
     public void setEmailText(String email) {
-        this.email.setText(email);
+        if (email.equals("example@email.com"))
+            this.email.setPromptText(email);
+        else
+            this.email.setText(email);
     }
 
     public void initialize(ScheduledExecutorService executorService) {

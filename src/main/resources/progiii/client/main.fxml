@@ -48,7 +48,7 @@
     <bottom>
         <AnchorPane BorderPane.alignment="CENTER">
             <children>
-                <Label fx:id="statusLabel" alignment="TOP_RIGHT" text="Barra di stato" textAlignment="RIGHT"
+                <Label fx:id="status" alignment="TOP_RIGHT" text="Barra di stato" textAlignment="RIGHT"
                        AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="0.0">
                     <padding>
                         <Insets bottom="2.0" left="2.0" right="2.0" top="2.0"/>

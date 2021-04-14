@@ -129,7 +129,7 @@ public class LoginTask implements Runnable {
             }
         } else {
             Platform.runLater(() -> {
-                controller.showMsg("Si è verificato un errore interno");
+                controller.showMsg("Internal error");
                 controller.toggleInterface(true);
             });
             throw new RuntimeException("Unhandled ServerAnswer Type: " + response.getType());

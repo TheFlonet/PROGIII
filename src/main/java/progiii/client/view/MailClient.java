@@ -90,7 +90,7 @@ public class MailClient extends Application {
         model.initialize(executorService, emailGetter);
         loginWindow = initLogin();
         mainWindow = initMain();
-        showLogin(getParameters().getNamed().get("start-email"));
+        showLogin();
     }
 
     public Stage initMain() throws IOException {
@@ -137,10 +137,10 @@ public class MailClient extends Application {
         return stage;
     }
 
-    public void showLogin(String email) {
+    public void showLogin() {
         loginWindow.show();
         loginWindow.setAlwaysOnTop(true);
-        loginController.setEmailText(email);
+        loginController.setEmailText("example@email.com");
     }
 
     public void hideLogin() {

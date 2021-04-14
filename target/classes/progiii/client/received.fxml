@@ -1,10 +1,8 @@
-<!--suppress JavaFxDefaultTag -->
-<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
-<Tab fx:id="rootTab" fx:controller="client.controllers.ReceivedEmailTabController"
+<Tab fx:id="tab" fx:controller="progiii.client.controller.ReceivedController"
      xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
     <content>
         <GridPane>
@@ -30,53 +28,25 @@
                         <Label fx:id="toNode"
                                layoutX="40.0" layoutY="70.0"
                                AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="75.0"/>
-                        <Label fx:id="dateSent"
+                        <Label fx:id="date"
                                layoutX="5.0" layoutY="91.0"
                                AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="100.0"/>
                         <GridPane alignment="CENTER_RIGHT" hgap="5.0" layoutX="237.0"
                                   layoutY="16.0" prefHeight="21.0" prefWidth="100.0" vgap="5.0"
                                   AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
                             <children>
-                                <Button fx:id="replyButton"
-                                        onMouseClicked="#handleReplyButtonClick"
+                                <Button text="Reply" onMouseClicked="#handleReply"
                                         mnemonicParsing="false">
-                                    <graphic>
-                                        <FontAwesomeIcon glyphName="MAIL_REPLY" size="12pt"/>
-                                    </graphic>
-                                    <tooltip>
-                                        <Tooltip text="Rispondi"/>
-                                    </tooltip>
                                 </Button>
-                                <Button fx:id="replyAllButton"
-                                        onMouseClicked="#handleReplyAllButtonClick"
+                                <Button text="Reply all" onMouseClicked="#handleReplyAll"
                                         mnemonicParsing="false" GridPane.columnIndex="1">
-                                    <graphic>
-                                        <FontAwesomeIcon glyphName="MAIL_REPLY_ALL" size="12pt"/>
-                                    </graphic>
-                                    <tooltip>
-                                        <Tooltip text="Rispondi a tutti"/>
-                                    </tooltip>
                                 </Button>
-                                <Button fx:id="forwardButton"
-                                        onMouseClicked="#handleForwardButtonClick"
+                                <Button text="Forward" onMouseClicked="#handleForward"
                                         mnemonicParsing="false" GridPane.columnIndex="2">
-                                    <graphic>
-                                        <FontAwesomeIcon glyphName="MAIL_FORWARD" size="12pt"/>
-                                    </graphic>
-                                    <tooltip>
-                                        <Tooltip text="Inoltra"/>
-                                    </tooltip>
-
                                 </Button>
-                                <Button fx:id="deleteButton"
-                                        onMouseClicked="#handleDeleteButtonClick"
+                                <Button text="Delete"
+                                        onMouseClicked="#handleDelete"
                                         mnemonicParsing="false" GridPane.columnIndex="3">
-                                    <graphic>
-                                        <FontAwesomeIcon glyphName="TRASH" size="12pt"/>
-                                    </graphic>
-                                    <tooltip>
-                                        <Tooltip text="Elimina"/>
-                                    </tooltip>
                                 </Button>
                             </children>
                             <columnConstraints>

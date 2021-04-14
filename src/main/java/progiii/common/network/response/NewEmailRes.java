@@ -20,12 +20,6 @@ public class NewEmailRes extends Response {
         this.emailSet = emailSet;
     }
 
-    @Deprecated // TODO usare Error
-    public NewEmailRes(String status) {
-        super(false, status);
-        this.emailSet = null;
-    }
-
     public Set<Email> getEmailSet() {
         return emailSet;
     }

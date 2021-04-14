@@ -6,9 +6,7 @@
 <?import javafx.scene.text.*?>
 
 <!-- ATTENZIONE!!!!! NON modificare la prefWidth!!! DEVE RIMANERE 100.0-->
-
-<!--suppress JavaFxDefaultTag -->
-<VBox fx:id="emailCellContainer" fillWidth="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+<VBox fx:id="container" fillWidth="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
       minHeight="-Infinity" minWidth="-Infinity" prefWidth="100.0" xmlns="http://javafx.com/javafx/10.0.2-internal"
       xmlns:fx="http://javafx.com/fxml/1">
     <children>
@@ -21,7 +19,7 @@
                 <Insets/>
             </VBox.margin>
         </Label>
-        <Label fx:id="from" text="ivan.spada@example.com">
+        <Label fx:id="from" text="example@test.com">
             <VBox.margin>
                 <Insets/>
             </VBox.margin>

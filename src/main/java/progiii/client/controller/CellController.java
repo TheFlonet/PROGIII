@@ -29,7 +29,7 @@ public class CellController extends ListCell<Email> {
             setGraphic(null);
         } else {
             if (loader == null) {
-                loader = new FXMLLoader(getClass().getResource("progiii/client/cell.fxml"));
+                loader = new FXMLLoader(getClass().getResource("/progiii/client/cell.fxml"));
                 loader.setController(this);
                 try {
                     loader.load();

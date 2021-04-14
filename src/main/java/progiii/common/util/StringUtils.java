@@ -9,7 +9,7 @@ public class StringUtils {
             throw new IllegalArgumentException("Email cannot be null");
         if (email.isEmpty())
             throw new IllegalArgumentException("Email cannot be empty");
-        Pattern emailPattern = Pattern.compile("^[A-Z0-9+_.-]+@[A-Z0-9.-]+$"); // email standard by RFC 5322
+        Pattern emailPattern = Pattern.compile("[A-Za-z0-9_.-]+@.+[A-Za-z0-9_-]+");
         Matcher matcher = emailPattern.matcher(email);
         if (matcher.find())
             return matcher.group().toLowerCase();
@@ -23,7 +23,7 @@ public class StringUtils {
             throw new IllegalArgumentException("Email cannot be empty");
         String[] emails = emailList.toLowerCase().split(",");
         ValidatorCollector checker = new ValidatorCollector();
-        Pattern emailPattern = Pattern.compile("^[A-Z0-9+_.-]+@[A-Z0-9.-]+$"); // email standard by RFC 5322
+        Pattern emailPattern = Pattern.compile("[A-Za-z0-9_.-]+@.+[A-Za-z0-9_-]+");
 
         for (String email : emails) {
             Matcher matcher = emailPattern.matcher(email);

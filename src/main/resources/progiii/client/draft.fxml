@@ -1,9 +1,7 @@
-<!--suppress JavaFxDefaultTag -->
-<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
-<Tab fx:id="rootTab" fx:controller="client.controllers.NewEmailTabController"
+<Tab fx:id="tab" fx:controller="progiii.client.controller.NewEmailController"
      xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
     <content>
         <GridPane>
@@ -41,23 +39,11 @@
                                   GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="NEVER"
                                   GridPane.valignment="TOP" GridPane.vgrow="NEVER">
                             <children>
-                                <Button fx:id="sendButton" mnemonicParsing="false"
-                                        onMouseClicked="#handleSendButtonClick">
-                                    <graphic>
-                                        <FontAwesomeIcon glyphName="PAPER_PLANE" size="12pt"/>
-                                    </graphic>
-                                    <tooltip>
-                                        <Tooltip text="Invia"/>
-                                    </tooltip>
+                                <Button text="Send" mnemonicParsing="false"
+                                        onMouseClicked="#handleSend">
                                 </Button>
-                                <Button fx:id="deleteButton" mnemonicParsing="false"
-                                        onMouseClicked="#handleDeleteButtonClick" GridPane.columnIndex="1">
-                                    <graphic>
-                                        <FontAwesomeIcon glyphName="TRASH" size="12pt"/>
-                                    </graphic>
-                                    <tooltip>
-                                        <Tooltip text="Elimina"/>
-                                    </tooltip>
+                                <Button text="Delete" mnemonicParsing="false"
+                                        onMouseClicked="#handleDeleteClick" GridPane.columnIndex="1">
                                 </Button>
                             </children>
                             <columnConstraints>

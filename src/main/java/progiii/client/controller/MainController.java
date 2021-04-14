@@ -1,7 +1,5 @@
 package progiii.client.controller;
 
-import com.sun.scenario.effect.Blend;
-import com.sun.tools.javac.Main;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -189,7 +187,7 @@ public class MainController implements Initializable {
         if (closeAll("Do you want to logout?")) {
             Model.getInstance().stopPullReq();
             model.getReceivedEmails().clear();
-            MailClient.getInstance().showLogin("");
+            MailClient.getInstance().showLogin();
             MailClient.getInstance().hideMain();
         }
     }
