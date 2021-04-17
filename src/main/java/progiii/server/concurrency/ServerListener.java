@@ -20,18 +20,14 @@ public class ServerListener implements Runnable {
     @Override
     public void run() {
         try (ServerSocket serverSocket = new ServerSocket(NetworkConfig.SERVER_PORT)) {
-            System.out.println("Connection opened, listening on port " + NetworkConfig.SERVER_PORT);
             MailServer.setMaxConnectionHandlers(serverSocket);
             while (!serverSocket.isClosed()) {
                 try {
                     Socket connection = serverSocket.accept();
-                    System.out.println("\n" + new Date() + " established connection " + connection.toString());
                     ConnectionHandler connectionHandler = new ConnectionHandler(connection);
                     executorService.submit(connectionHandler);
                 } catch (SocketException e) {
-                    if (e.getMessage().equals("Socket closed"))
-                        System.out.println("Socket closed");
-                    else
+                    if (!e.getMessage().equals("Socket closed"))
                         e.printStackTrace();
                 } catch (IOException e) {
                     e.printStackTrace();

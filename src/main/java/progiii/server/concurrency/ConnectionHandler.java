@@ -21,7 +21,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class ConnectionHandler implements Runnable {
-    private Socket connection;
+    private final Socket connection;
 
     public ConnectionHandler(Socket connection) {
         this.connection = connection;

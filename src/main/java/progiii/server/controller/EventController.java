@@ -13,14 +13,12 @@ import java.text.SimpleDateFormat;
 
 public class EventController {
     private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy 'at' HH:mm:ss");
-    private Event event;
     @FXML
     private ListView<Action> actionListView;
     @FXML
     private Label details;
 
     public void initialize(Event event) {
-        this.event = event;
         details.setText(String.format("%s: request type: %s, sent from %s. Final state: %s",
                 DATE_FORMAT.format(event.getDate()), event.getRequestType().toString(), event.getClient(), event.getType()));
         actionListView.setCellFactory(new Callback<>() {

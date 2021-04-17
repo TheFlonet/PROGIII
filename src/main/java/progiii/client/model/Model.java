@@ -57,4 +57,8 @@ public class Model {
     public synchronized void stopPullReq() {
         emailGetter.stopService();
     }
+
+    public synchronized boolean pausePullReq(int delay) {
+        return emailGetter.pauseService(delay);
+    }
 }

@@ -22,7 +22,7 @@
                     <rowConstraints>
                         <RowConstraints minHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
-                    <Button mnemonicParsing="false" onMouseClicked="#openEmailTab" text="Write" />
+                    <Button mnemonicParsing="false" onMouseClicked="#openNewEmailTab" text="Write" />
                     <Button mnemonicParsing="false" onMouseClicked="#logoutClick" text="Logout" GridPane.columnIndex="1" />
                 </GridPane>
                 <ListView fx:id="receivedEmails" editable="true" maxHeight="1.7976931348623157E308" onKeyReleased="#handleEmailTyped" onMouseClicked="#handleEmailClick" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" />

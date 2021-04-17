@@ -16,8 +16,8 @@ public class Event implements Comparable<Event>{
     private String client = null;
     private RequestType requestType;
     private EventType type;
-    private List<Action> actions;
-    private Date date;
+    private final List<Action> actions;
+    private final Date date;
     private boolean concluded = false;
 
     public Event() {

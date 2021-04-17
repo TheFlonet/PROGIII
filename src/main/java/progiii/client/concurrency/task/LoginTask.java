@@ -60,7 +60,6 @@ public class LoginTask implements Runnable {
             });
         } else if (type == ResponseType.EMAIL_EXISTENCE) {
             EmailExistenceRes finalResponse = (EmailExistenceRes) response;
-            System.out.println(response);
             boolean emailExist = finalResponse.getResult(email);
             Platform.runLater(() -> {
                 controller.showMsg(String.format("Mail %s", emailExist ? "exist" : "doesn't exist"));

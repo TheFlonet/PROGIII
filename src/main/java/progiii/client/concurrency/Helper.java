@@ -43,7 +43,6 @@ public class Helper {
                 msg = e.getCause().getMessage();
                 if (msg.equals("Connection refused"))
                     msg = "Server unreachable";
-                System.out.println(caller + " connection error: " + msg);
             } else {
                 e.printStackTrace();
                 msg = e.getMessage();

@@ -33,7 +33,6 @@ public class DataManager {
         gsonBuilder.registerTypeAdapter(IdHandler.class, new IdHandler.Adapter());
         gsonBuilder.registerTypeAdapter(Email.class, new Email.Adapter());
         gson = gsonBuilder.create();
-        System.out.println(dataDir);
 
         if (!Files.isDirectory(dataDir)) {
             try {
@@ -76,7 +75,7 @@ public class DataManager {
 
     public Set<Email> getMissingUserEmails(String email, Set<Integer> busyId) throws Exception {
         Set<Email> newEmails = new HashSet<>();
-        try (ClosableRes lock = getEmailLock(email);
+        try (ClosableRes ignored = getEmailLock(email);
              Stream<Path> emailPath = Files.walk(dataDir.resolve(email))) {
             Iterator<Path> paths;
             paths = emailPath.filter(Files::isRegularFile).filter(path -> {
@@ -106,7 +105,7 @@ public class DataManager {
     }
 
     public void registerEmail(String email) throws Exception {
-        try (ClosableRes emailLock = getEmailLock(email)) {
+        try (ClosableRes ignored = getEmailLock(email)) {
             if (userExists(email)) {
                 throw new IllegalArgumentException(String.format("Email %s already exists", email));
             }
@@ -122,7 +121,7 @@ public class DataManager {
     public void deliver(String recipient, Email email) {
         if (!userExists(recipient))
             throw new IllegalArgumentException(recipient + " doesn't exist");
-        try (ClosableRes emailLock = getEmailLock(recipient)) {
+        try (ClosableRes ignored = getEmailLock(recipient)) {
             File emailPath = dataDir.resolve(recipient).resolve(String.format("%d.%s", email.getId(), EXTENSION)).toFile();
             try (FileWriter fileWriter = new FileWriter(emailPath, false);
                  BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
@@ -131,7 +130,6 @@ public class DataManager {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -141,7 +139,7 @@ public class DataManager {
         if (!userExists(owner))
             throw new IllegalArgumentException(owner + " doesn't exist");
         File toDeletePath = dataDir.resolve(owner).resolve(String.format("%d.%s", id, EXTENSION)).toFile();
-        try (ClosableRes lock = getEmailLock(owner)) {
+        try (ClosableRes ignored = getEmailLock(owner)) {
             return toDeletePath.delete();
         } catch (Exception e) {
             e.printStackTrace();

@@ -7,7 +7,7 @@ import progiii.server.util.log.Event;
 
 public class Model {
     private static Model INSTANCE;
-    private ObservableList<Event> events = FXCollections.observableArrayList();
+    private final ObservableList<Event> events = FXCollections.observableArrayList();
 
     public Model() {
         if (INSTANCE != null)

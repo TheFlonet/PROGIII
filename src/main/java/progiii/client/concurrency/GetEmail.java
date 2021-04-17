@@ -46,14 +46,13 @@ public class GetEmail implements Runnable {
             out.writeObject(request);
 
             NewEmailRes response = (NewEmailRes) in.readObject();
-            System.out.println(response);
 
-            int tries = resetTries();
+            int oldTries = resetTries();
             FutureTask<Void> task = new FutureTask<>(() -> {
                 Model.getInstance().getReceivedEmails().addAll(response.getEmailSet());
                 if (response.getEmailSet().size() > 0)
                     MainController.getInstance().showStatusMsg(String.format("%d new emails", response.getEmailSet().size()), Color.BLACK);
-                else if (tries != 0)
+                else if (oldTries != 0)
                     MainController.getInstance().showStatusMsg("Connection restored. No new emails received", Color.BLACK);
                 return null;
             });
@@ -61,7 +60,6 @@ public class GetEmail implements Runnable {
             Platform.runLater(task);
             task.get();
         } catch (UnexpectedException | ConnectException e) {
-            System.out.println("Error while connecting to server: " + e.toString());
             int tries = ++failedConnectionTries;
             Platform.runLater(() -> {
                 if (tries == 1)
@@ -71,6 +69,8 @@ public class GetEmail implements Runnable {
         } catch (InterruptedException e) {
             System.err.println("Interrupted while waiting for a task");
         } catch (IOException | ClassNotFoundException | ExecutionException e) {
+            e.printStackTrace();
+        } finally {
             if (!executorService.isShutdown())
                 nextRequest();
         }
@@ -105,9 +105,9 @@ public class GetEmail implements Runnable {
             if (currentExec.cancel(false)) {
                 scheduleNextRequest(timeLeft + delay);
                 return true;
-            } else throw new IllegalStateException("Pull service isn't initialized");
-        }
-        return false;
+            }
+            return false;
+        } else throw new IllegalStateException("Pull service isn't initialized");
     }
 
     private int resetTries() {

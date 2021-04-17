@@ -33,7 +33,6 @@ public class NewEmailController extends TabController {
 
     @FXML
     private void handleSend(MouseEvent event) {
-        System.out.println("Send button clicked on email with id " + email.getId());
         String error = null;
         ValidatorCollector results = null;
         try {

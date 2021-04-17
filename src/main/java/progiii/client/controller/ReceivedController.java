@@ -1,6 +1,7 @@
 package progiii.client.controller;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.input.MouseEvent;
 import progiii.client.concurrency.task.DeleteTask;
@@ -9,7 +10,6 @@ import progiii.client.view.MailClient;
 import progiii.common.data.Email;
 import progiii.common.util.StringUtils;
 
-import java.awt.*;
 import java.util.Date;
 import java.util.Set;
 
@@ -31,15 +31,15 @@ public class ReceivedController extends TabController {
     public void initialize(Email email) {
         super.initialize(email);
         tab.textProperty().bind(email.subjectProperty());
-        ((javafx.scene.control.Label) fromNode).textProperty().bind(email.fromProperty());
-        ((javafx.scene.control.Label) subjectNode).textProperty().bind(email.subjectProperty());
-        ((javafx.scene.control.Label) toNode).textProperty().bind(email.toProperty());
-        ((javafx.scene.control.Label) textNode).textProperty().bind(email.textProperty());
+        ((Label) fromNode).textProperty().bind(email.fromProperty());
+        ((Label) subjectNode).textProperty().bind(email.subjectProperty());
+        ((Label) toNode).textProperty().bind(email.toProperty());
+        ((Label) textNode).textProperty().bind(email.textProperty());
         date.setText(Email.DATE_FORMAT.format(email.getDate()));
     }
 
     private String replyString() {
-        return String.format(replyFormat, email.getDate(), email.getFrom(), email.getTo(), email.getSubject(), email.getText());
+        return String.format(replyFormat, email.getFormattedDate(), email.getFrom(), email.getTo(), email.getSubject(), email.getText());
     }
 
     @Override
@@ -56,7 +56,7 @@ public class ReceivedController extends TabController {
     private void handleReply(MouseEvent event) {
         Email replyEmail = new Email(-1, Model.getInstance().getEmail(), email.getFrom(),
                 "Re: " + email.getSubject(), replyString(), new Date());
-        Tab replyTab = MainController.getInstance().openEmailTab(replyEmail);
+        Tab replyTab = MainController.getInstance().openNewEmailTab(replyEmail);
         MainController.getInstance().setCurrentTab(replyTab);
     }
 
@@ -64,7 +64,7 @@ public class ReceivedController extends TabController {
     private void handleForward(MouseEvent event) {
         Email forwardEmail = new Email(-1, Model.getInstance().getEmail(), "",
                 "Fwd: " + email.getSubject(), replyString(), new Date());
-        Tab forwardTab = MainController.getInstance().openEmailTab(forwardEmail);
+        Tab forwardTab = MainController.getInstance().openNewEmailTab(forwardEmail);
         MainController.getInstance().setCurrentTab(forwardTab);
     }
 
@@ -77,7 +77,7 @@ public class ReceivedController extends TabController {
             recipients.add(email.getFrom());
         Email replyEmail = new Email(-1, Model.getInstance().getEmail(), String.join(", ", recipients),
                 "Re: " + email.getSubject(), replyString(), new Date());
-        Tab replyTab = MainController.getInstance().openEmailTab(replyEmail);
+        Tab replyTab = MainController.getInstance().openNewEmailTab(replyEmail);
         MainController.getInstance().setCurrentTab(replyTab);
     }
 }

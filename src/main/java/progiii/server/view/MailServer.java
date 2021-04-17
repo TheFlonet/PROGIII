@@ -39,7 +39,7 @@ public class MailServer extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        dataManager = new DataManager(Paths.get(String.valueOf(getClass().getResource("/progiii/server/data/"))));
+        dataManager = new DataManager(Paths.get(Objects.requireNonNull(getClass().getResource("/progiii/server/data/")).toURI()));
         new Model();
         executorService = Executors.newFixedThreadPool(MAX_CONNECTION_HANDLERS);
         listener = executorService.submit(new ServerListener(executorService), null);

@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-
 <BorderPane minHeight="630.0" minWidth="800.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="progiii.client.controller.MainController">
     <center>
         <SplitPane dividerPositions="0.20551378446115287" prefHeight="421.0" prefWidth="800.0" BorderPane.alignment="CENTER">
@@ -23,7 +22,7 @@
                     <rowConstraints>
                         <RowConstraints minHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
-                    <Button mnemonicParsing="false" onMouseClicked="#openEmailTab" text="Write" />
+                    <Button mnemonicParsing="false" onMouseClicked="#openNewEmailTab" text="Write" />
                     <Button mnemonicParsing="false" onMouseClicked="#logoutClick" text="Logout" GridPane.columnIndex="1" />
                 </GridPane>
                 <ListView fx:id="receivedEmails" editable="true" maxHeight="1.7976931348623157E308" onKeyReleased="#handleEmailTyped" onMouseClicked="#handleEmailClick" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" />

@@ -98,6 +98,10 @@ public class Email implements Serializable, Comparable<Email> {
                 '}';
     }
 
+    public String getFormattedDate() {
+        return DATE_FORMAT.format(date.get());
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

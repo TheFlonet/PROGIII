@@ -25,7 +25,7 @@ public class PullReq extends Request{
 
     @Override
     public String toString() {
-        String emails = localIdSet.stream().map(Objects::toString).collect(Collectors.joining(", ", "[", "]"));
+        String emails = localIdSet.stream().map(Object::toString).collect(Collectors.joining(", ", "[", "]"));
         return String.format("""
                 Pull request {
                 \tClient email: %s

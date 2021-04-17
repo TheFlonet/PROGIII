@@ -59,7 +59,7 @@ public class MainController implements Initializable {
         if (event.getButton().equals(MouseButton.PRIMARY))
             if (event.getClickCount() == 2) {
                 Email selected = receivedEmails.getSelectionModel().getSelectedItem();
-                Tab newTab = openEmailsTab(selected);
+                Tab newTab = openReceivedTab(selected);
                 if (newTab != null)
                     setCurrentTab(newTab);
             }
@@ -69,7 +69,7 @@ public class MainController implements Initializable {
     private void handleEmailTyped(KeyEvent event) {
         if (new KeyCodeCombination(KeyCode.ENTER).match(event))
             for (Email selected : receivedEmails.getSelectionModel().getSelectedItems()) {
-                Tab newTab = openEmailsTab(selected);
+                Tab newTab = openReceivedTab(selected);
                 if (newTab != null)
                     setCurrentTab(newTab);
             }
@@ -94,20 +94,20 @@ public class MainController implements Initializable {
     }
 
     @FXML
-    private Tab openEmailTab() {
+    private Tab openNewEmailTab() {
         Email newEmail = new Email(-1, "from@me.com", "", "Nuova Email", "", new Date());
-        Tab newEmailTab = openTab(newEmail, draftStructure, this::closeTab);
+        Tab newEmailTab = openEmailTab(newEmail, draftStructure, this::closeTab);
         setCurrentTab(newEmailTab);
         return newEmailTab;
     }
 
-    public Tab openEmailTab(Email email) {
-        return openTab(email, draftStructure, this::closeTab);
+    public Tab openNewEmailTab(Email email) {
+        return openEmailTab(email, draftStructure, this::closeTab);
     }
 
-    private Tab openEmailsTab(Email selected) {
+    private Tab openReceivedTab(Email selected) {
         if (!openEmails.containsKey(selected))
-            return openTab(selected, receivedStructure, this::closeTab);
+            return openEmailTab(selected, receivedStructure, this::closeTab);
         else return null;
     }
 
@@ -115,7 +115,7 @@ public class MainController implements Initializable {
         tabPane.getSelectionModel().select(curr);
     }
 
-    private Tab openTab(Email email, URL tabStructure, BiConsumer<Email, Event> closerMethod) {
+    private Tab openEmailTab(Email email, URL tabStructure, BiConsumer<Email, Event> closerMethod) {
         FXMLLoader loader = new FXMLLoader(tabStructure);
         try {
             loader.load();
