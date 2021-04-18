@@ -31,14 +31,13 @@ public class ConnectionHandler implements Runnable {
     public void run() {
         Event event = new Event();
         event.addNormalMsg("Received connection from " + connection.getInetAddress().toString());
-        try (ClosableRes toClose = event::conclude) {
+        try (ClosableRes ignored = event::conclude) {
             try (ObjectInputStream in = new ObjectInputStream(connection.getInputStream());
                  ObjectOutputStream out = new ObjectOutputStream(connection.getOutputStream())) {
                 Response response = new ErrorRes("Server side error");
                 try {
                     Request request = (Request) in.readObject();
                     event.setRequest(request);
-                    System.out.println(request);
 
                     switch (request.getType()) {
                         case PULL -> {

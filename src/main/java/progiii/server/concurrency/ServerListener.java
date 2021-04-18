@@ -11,7 +11,7 @@ import java.util.Date;
 import java.util.concurrent.ExecutorService;
 
 public class ServerListener implements Runnable {
-    ExecutorService executorService;
+    private final ExecutorService executorService;
 
     public ServerListener(ExecutorService executorService) {
         this.executorService = executorService;

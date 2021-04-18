@@ -20,7 +20,7 @@
         </font>
     </Label>
     <TextField fx:id="email" layoutX="60.0" layoutY="70.0" prefHeight="25.0" prefWidth="255.0"
-               AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="80.0"/>
+               AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="90.0"/>
     <Label fx:id="status" alignment="CENTER" layoutX="170.0" layoutY="150.0" maxWidth="360.0" prefHeight="20.0"
            text="Status" textAlignment="CENTER" visible="false" AnchorPane.bottomAnchor="5.0"
            AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0"/>

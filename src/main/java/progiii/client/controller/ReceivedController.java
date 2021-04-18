@@ -16,6 +16,7 @@ import java.util.Set;
 public class ReceivedController extends TabController {
     private static final String replyFormat = """
                         
+                        
             ---
             %s
             From: %s
