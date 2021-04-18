@@ -2,6 +2,8 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
 <Tab fx:id="tab" fx:controller="progiii.client.controller.ReceivedController"
      xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
     <GridPane>
@@ -16,7 +18,7 @@
                     prefWidth="160.0">
             <Label fx:id="fromNode"
                    layoutX="40.0" layoutY="50.0"
-                   AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="50.0"/>
+                   AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="50.0"/>
             <Label text="To:"
                    layoutX="15.0" layoutY="70.0"
                    AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="75.0"/>
@@ -31,12 +33,12 @@
                    AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="50.0"/>
             <Label fx:id="toNode"
                    layoutX="40.0" layoutY="70.0"
-                   AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="75.0"/>
+                   AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="75.0"/>
             <Label fx:id="date"
                    layoutX="5.0" layoutY="90.0"
                    AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="100.0"/>
             <GridPane alignment="CENTER_RIGHT" hgap="5.0" layoutX="235.0"
-                      layoutY="16.0" prefHeight="20.0" prefWidth="100.0" vgap="5.0"
+                      layoutY="15.0" prefHeight="20.0" prefWidth="100.0" vgap="5.0"
                       AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
                 <columnConstraints>
                     <ColumnConstraints halignment="CENTER" prefWidth="100.0"/>
@@ -48,45 +50,72 @@
                     <RowConstraints prefHeight="30.0" valignment="CENTER"
                                     vgrow="SOMETIMES"/>
                 </rowConstraints>
-                <Button text="Reply" onMouseClicked="#handleReply"
+                <Button onMouseClicked="#handleReply"
                         mnemonicParsing="false">
+                    <graphic>
+                        <ImageView fitHeight="16" fitWidth="16" pickOnBounds="true" preserveRatio="true">
+                            <Image url="@img/reply.png"/>
+                        </ImageView>
+                    </graphic>
+                    <tooltip>
+                        <Tooltip text="Reply"/>
+                    </tooltip>
                 </Button>
-                <Button text="Reply all" onMouseClicked="#handleReplyAll"
+                <Button onMouseClicked="#handleReplyAll"
                         mnemonicParsing="false" GridPane.columnIndex="1">
+                    <graphic>
+                        <ImageView fitHeight="16" fitWidth="16" pickOnBounds="true" preserveRatio="true">
+                            <Image url="@img/reply_all.png"/>
+                        </ImageView>
+                    </graphic>
+                    <tooltip>
+                        <Tooltip text="Reply All"/>
+                    </tooltip>
                 </Button>
-                <Button text="Forward" onMouseClicked="#handleForward"
+                <Button onMouseClicked="#handleForward"
                         mnemonicParsing="false" GridPane.columnIndex="2">
+                    <graphic>
+                        <ImageView fitHeight="16" fitWidth="16" pickOnBounds="true" preserveRatio="true">
+                            <Image url="@img/forward.png"/>
+                        </ImageView>
+                    </graphic>
+                    <tooltip>
+                        <Tooltip text="Forward"/>
+                    </tooltip>
                 </Button>
-                <Button text="Delete"
-                        onMouseClicked="#handleDelete"
+                <Button onMouseClicked="#handleDelete"
                         mnemonicParsing="false" GridPane.columnIndex="3">
+                    <graphic>
+                        <ImageView fitHeight="16" fitWidth="16" pickOnBounds="true" preserveRatio="true">
+                            <Image url="@img/delete.png"/>
+                        </ImageView>
+                    </graphic>
+                    <tooltip>
+                        <Tooltip text="Delete"/>
+                    </tooltip>
                 </Button>
             </GridPane>
         </AnchorPane>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0"
                     GridPane.rowIndex="1">
-            <children>
-                <ScrollPane fitToWidth="true" hbarPolicy="NEVER" layoutX="-1.0"
-                            layoutY="36.0" prefViewportHeight="651.0"
-                            prefViewportWidth="622.060546875"
-                            AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="-1.0"
-                            AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="-1.0">
-                    <content>
-                        <Label fx:id="textNode"
-                               alignment="TOP_LEFT" depthTest="DISABLE" layoutX="84.0"
-                               layoutY="83.0" maxWidth="1.7976931348623157E308"
-                               wrapText="true" AnchorPane.leftAnchor="5.0"
-                               AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
-                            <opaqueInsets>
-                                <Insets/>
-                            </opaqueInsets>
-                            <padding>
-                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
-                            </padding>
-                        </Label>
-                    </content>
-                </ScrollPane>
-            </children>
+            <ScrollPane fitToWidth="true" hbarPolicy="NEVER"
+                        layoutY="35.0" prefViewportHeight="650.0"
+                        prefViewportWidth="625"
+                        AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0"
+                        AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
+                <Label fx:id="textNode"
+                       alignment="TOP_LEFT" depthTest="DISABLE" layoutX="85.0"
+                       layoutY="85.0" maxWidth="2E308"
+                       wrapText="true" AnchorPane.leftAnchor="5.0"
+                       AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+                    <opaqueInsets>
+                        <Insets/>
+                    </opaqueInsets>
+                    <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                    </padding>
+                </Label>
+            </ScrollPane>
         </AnchorPane>
     </GridPane>
 </Tab>

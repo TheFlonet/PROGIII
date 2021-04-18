@@ -13,8 +13,9 @@ import java.util.Date;
 import java.util.Objects;
 
 public class Email implements Serializable, Comparable<Email> {
+    public transient static final SimpleDateFormat COMPACT_DATE_FORMAT = new SimpleDateFormat("dd-MM-yyyy");
     public transient static final SimpleDateFormat DATE_FORMAT =
-            new SimpleDateFormat("'Sent:' EEEE d MMMM yyyy 'at' H:m");
+            new SimpleDateFormat("'Sent:' EEEE MMMM d yyyy 'at' H:m");
     private transient SimpleIntegerProperty id;
     private transient SimpleStringProperty from;
     private transient SimpleStringProperty to;
@@ -100,6 +101,10 @@ public class Email implements Serializable, Comparable<Email> {
 
     public String getFormattedDate() {
         return DATE_FORMAT.format(date.get());
+    }
+
+    public String getCompactDate() {
+        return COMPACT_DATE_FORMAT.format(date.get());
     }
 
     @Override

@@ -6,25 +6,33 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-<VBox fx:id="container" fillWidth="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefWidth="100.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
-    <children>
-        <Label fx:id="subject" alignment="TOP_LEFT" nodeOrientation="LEFT_TO_RIGHT" text="Extremely long text to test cell field in UI window" textOverrun="WORD_ELLIPSIS">
-            <font>
-                <Font name="System Bold" size="15.0" />
-            </font>
-            <VBox.margin>
-                <Insets />
-            </VBox.margin>
-        </Label>
-        <Label fx:id="from" text="example@test.com">
-            <VBox.margin>
-                <Insets />
-            </VBox.margin>
-        </Label>
-        <Label fx:id="text" maxHeight="50.0" text="Toooooooooooooooooooooooooooooooooo long text to be shown in a simple cell, open a tab!" textOverrun="WORD_ELLIPSIS" wrapText="true">
-            <VBox.margin>
-                <Insets />
-            </VBox.margin>
-        </Label>
-    </children>
+<VBox fx:id="container" fillWidth="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+      minHeight="-Infinity" minWidth="-Infinity" prefWidth="100.0" xmlns="http://javafx.com/javafx/11.0.1"
+      xmlns:fx="http://javafx.com/fxml/1">
+    <Label fx:id="from" text="example@test.com">
+        <VBox.margin>
+            <Insets/>
+        </VBox.margin>
+    </Label>
+    <Label fx:id="date">
+        <VBox.margin>
+            <Insets/>
+        </VBox.margin>
+    </Label>
+    <Label fx:id="subject" alignment="TOP_LEFT" nodeOrientation="LEFT_TO_RIGHT"
+           text="Extremely long text to test cell field in UI window" textOverrun="WORD_ELLIPSIS">
+        <font>
+            <Font name="System Bold" size="15.0"/>
+        </font>
+        <VBox.margin>
+            <Insets/>
+        </VBox.margin>
+    </Label>
+    <Label fx:id="text" maxHeight="50.0"
+           text="Toooooooooooooooooooooooooooooooooo long text to be shown in a simple cell, open a tab!"
+           textOverrun="WORD_ELLIPSIS" wrapText="true">
+        <VBox.margin>
+            <Insets/>
+        </VBox.margin>
+    </Label>
 </VBox>

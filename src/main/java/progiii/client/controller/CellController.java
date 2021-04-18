@@ -17,6 +17,8 @@ public class CellController extends ListCell<Email> {
     @FXML
     private Label text;
     @FXML
+    private Label date;
+    @FXML
     private Parent container;
     private FXMLLoader loader;
 
@@ -40,6 +42,7 @@ public class CellController extends ListCell<Email> {
             subject.setText(email.getSubject());
             from.setText(email.getFrom());
             text.setText(email.getText());
+            date.setText(email.getCompactDate());
             setText(null);
             setGraphic(container);
         }
