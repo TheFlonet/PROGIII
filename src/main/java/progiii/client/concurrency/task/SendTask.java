@@ -55,7 +55,6 @@ public class SendTask implements Runnable {
             return;
         }
 
-        System.out.println(existenceResponse);
         EmailExistenceRes finalResponse = existenceResponse;
         String missEmails = existenceResponse.getResult().keySet().stream().filter(email -> !finalResponse.getResult()
                 .get(email)).collect(Collectors.joining("\n\t"));

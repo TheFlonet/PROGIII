@@ -45,7 +45,6 @@ public class ConnectionHandler implements Runnable {
                             Set<Email> emails = MailServer.getDataManager().getMissingUserEmails(pull.getEmail(), pull.getLocalIdSet());
                             response = new NewEmailRes(emails);
                             event.addNormalMsg(String.format("%d new email(s)", emails.size()));
-                            System.out.println(response);
                             out.writeObject(response);
                         }
                         case CHECK -> {

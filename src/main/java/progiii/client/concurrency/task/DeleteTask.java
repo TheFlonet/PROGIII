@@ -9,7 +9,6 @@ import progiii.client.model.Model;
 import progiii.common.data.Email;
 import progiii.common.network.ResponseType;
 import progiii.common.network.request.DeleteReq;
-import progiii.common.network.response.ErrorRes;
 import progiii.common.network.response.Response;
 
 import java.util.NoSuchElementException;
