@@ -17,6 +17,10 @@ import java.net.URL;
 import java.util.*;
 import java.util.function.BiConsumer;
 
+/**
+ *
+ * Controller principale con lista delle email, gestisce le varie tab dell'applicazione
+ */
 public class MainController implements Initializable {
     private static MainController INSTANCE;
     @FXML
@@ -38,12 +42,25 @@ public class MainController implements Initializable {
         return INSTANCE;
     }
 
+    /**
+     *
+     * @param controller
+     *
+     * In mutex inizializza il controller
+     */
     private static synchronized void setSingleton(MainController controller) {
         if (INSTANCE == null)
             INSTANCE = controller;
         else throw new RuntimeException("Controller can only be initialized once");
     }
 
+    /**
+     *
+     * @param location
+     * @param resources
+     *
+     * Inizializza il model, la grafica delle tab apribili, la factory per le celle
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         this.model = Model.getInstance();
@@ -54,6 +71,13 @@ public class MainController implements Initializable {
         receivedEmails.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
     }
 
+    /**
+     *
+     * @param event
+     *
+     * Gestisce il doppio click su una cella della listView
+     * Apre una tab per visualizzare l'email
+     */
     @FXML
     private void handleEmailClick(MouseEvent event) {
         if (event.getButton().equals(MouseButton.PRIMARY))
@@ -65,34 +89,43 @@ public class MainController implements Initializable {
             }
     }
 
-    @FXML
-    private void handleEmailTyped(KeyEvent event) {
-        if (new KeyCodeCombination(KeyCode.ENTER).match(event))
-            for (Email selected : receivedEmails.getSelectionModel().getSelectedItems()) {
-                Tab newTab = openReceivedTab(selected);
-                if (newTab != null)
-                    setCurrentTab(newTab);
-            }
-        else if (new KeyCodeCombination(KeyCode.DELETE).match(event)) {
-            Set<Email> selected = Set.copyOf(receivedEmails.getSelectionModel().getSelectedItems());
-            MailClient.getInstance().getExecutorService().submit(new DeleteTask(selected, Model.getInstance().getEmail(), MailClient.getInstance().getExecutorService()));
-        }
-    }
-
+    /**
+     *
+     * @param msg
+     *
+     * Mostra l'errore colorandolo di rosso
+     */
     public void showStatusError(String msg) {
         showStatusMsg(msg, Color.RED);
     }
 
+    /**
+     *
+     * @param msg
+     * @param color
+     *
+     * Mostra un generico messaggio colorandolo
+     */
     public void showStatusMsg(String msg, Color color) {
         Date date = new Date();
         status.setText(String.format("%tH:%tM - %s", date, date, msg));
         status.setTextFill(color);
     }
 
+    /**
+     *
+     * Resetta la label di stato
+     */
     public void clearStatusMsg() {
         status.setText("");
     }
 
+    /**
+     *
+     * @return
+     *
+     * Apre una tab per scrivere l'email
+     */
     @FXML
     private Tab openNewEmailTab() {
         Email newEmail = new Email(-1, "from@me.com", "", "Nuova Email", "", new Date());
@@ -105,16 +138,38 @@ public class MainController implements Initializable {
         return openEmailTab(email, draftStructure, this::closeTab);
     }
 
+    /**
+     *
+     * @param selected
+     * @return
+     *
+     * Apre una tab per leggere un'email
+     */
     private Tab openReceivedTab(Email selected) {
         if (!openEmails.containsKey(selected))
             return openEmailTab(selected, receivedStructure, this::closeTab);
         else return null;
     }
 
+    /**
+     *
+     * @param curr
+     *
+     * Sposta il focus del tab pane sulla tab appena aperta
+     */
     public void setCurrentTab(Tab curr) {
         tabPane.getSelectionModel().select(curr);
     }
 
+    /**
+     *
+     * @param email
+     * @param tabStructure
+     * @param closerMethod
+     * @return
+     *
+     * Apre una generica tab e imposta il listener per la chiusura
+     */
     private Tab openEmailTab(Email email, URL tabStructure, BiConsumer<Email, Event> closerMethod) {
         FXMLLoader loader = new FXMLLoader(tabStructure);
         try {
@@ -131,11 +186,24 @@ public class MainController implements Initializable {
         return newTab;
     }
 
+    /**
+     *
+     * @param selected
+     *
+     * Chiude la tab e cancella l'email in scrittura
+     */
     public void deleteEmail(Email selected) {
         closeTab(selected);
         model.getReceivedEmails().remove(selected);
     }
 
+    /**
+     *
+     * @param selected
+     * @param event
+     *
+     * Chiude la tab chiedendo prima all'utente conferma con un popup
+     */
     private void closeTab(Email selected, Event event) {
         closeTab(selected);
         event.consume();
@@ -163,6 +231,13 @@ public class MainController implements Initializable {
         return false;
     }
 
+    /**
+     *
+     * @param prompt
+     * @return
+     *
+     * Chiude tutte le tab aperte
+     */
     public boolean closeAll(String prompt) {
         Alert confirmationAlert = new Alert(Alert.AlertType.CONFIRMATION, prompt);
         ButtonType choice = confirmationAlert.showAndWait().orElse(ButtonType.CANCEL);
@@ -178,6 +253,14 @@ public class MainController implements Initializable {
         return true;
     }
 
+    /**
+     *
+     * @param event
+     *
+     * Gestisce la richiesta di logout
+     * NB il logout è solo lato client, il server non si aspetta logout
+     * La richiesta di autenticazione iniziale serve solo per garantire che la mail esista
+     */
     @FXML
     private void logoutClick(MouseEvent event) {
         if (closeAll("Do you want to logout?")) {

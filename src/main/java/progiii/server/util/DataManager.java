@@ -24,6 +24,13 @@ public class DataManager {
     private final Gson gson;
     private final Map<String, ClosableLock> lockMap = new HashMap<>();
 
+    /**
+     *
+     * @param dataDir
+     *
+     * Recupera il path della cartella per il salvataggio delle email
+     * Inizializza il builder Gson (per scrittura e lettura di informazioni json)
+     */
     public DataManager(Path dataDir) {
         if (Files.isRegularFile(dataDir))
             throw new IllegalArgumentException("Passed path is a file");
@@ -59,6 +66,14 @@ public class DataManager {
         }
     }
 
+    /**
+     *
+     * @param email
+     * @return
+     * @throws IllegalArgumentException
+     *
+     * Ottiene il lock per la singola email e si occupa di rilasciarlo
+     */
     private synchronized ClosableRes getEmailLock(String email) throws IllegalArgumentException {
         ClosableLock emailLock = lockMap.get(StringUtils.cleanEmail(email));
         if (emailLock == null) {
@@ -68,11 +83,28 @@ public class DataManager {
         return emailLock.lockAsResource();
     }
 
+    /**
+     *
+     * @param email
+     * @return
+     * @throws IllegalArgumentException
+     *
+     * Controlla se esiste la cartella utente
+     */
     public boolean userExists(String email) throws IllegalArgumentException {
         Path path = dataDir.resolve(StringUtils.cleanEmail(email));
         return Files.isDirectory(path);
     }
 
+    /**
+     *
+     * @param email
+     * @param busyId
+     * @return
+     * @throws Exception
+     *
+     * Ottiene il set di email da spedire in risposta al client
+     */
     public Set<Email> getMissingUserEmails(String email, Set<Integer> busyId) throws Exception {
         Set<Email> newEmails = new HashSet<>();
         try (ClosableRes ignored = getEmailLock(email);
@@ -104,6 +136,13 @@ public class DataManager {
         return newEmails;
     }
 
+    /**
+     *
+     * @param email
+     * @throws Exception
+     *
+     * Ottiene il lock per la mail e crea la cartella per la persistenza
+     */
     public void registerEmail(String email) throws Exception {
         try (ClosableRes ignored = getEmailLock(email)) {
             if (userExists(email)) {
@@ -118,6 +157,13 @@ public class DataManager {
         }
     }
 
+    /**
+     *
+     * @param recipient
+     * @param email
+     *
+     * Ottiene il lock per la mail del destinatario e invia il messaggio
+     */
     public void deliver(String recipient, Email email) {
         if (!userExists(recipient))
             throw new IllegalArgumentException(recipient + " doesn't exist");
@@ -135,6 +181,14 @@ public class DataManager {
         }
     }
 
+    /**
+     *
+     * @param owner
+     * @param id
+     * @return
+     *
+     * Ottiene il lock e elimina la mail (avendo l’id)
+     */
     public boolean delete(String owner, int id) {
         if (!userExists(owner))
             throw new IllegalArgumentException(owner + " doesn't exist");
@@ -147,6 +201,12 @@ public class DataManager {
         return false;
     }
 
+    /**
+     *
+     * @return
+     *
+     * Ottiene l’id per la prossima mail
+     */
     public synchronized int reserveId() {
         IdHandler handler;
         try (FileReader fileReader = new FileReader(persistentDataPath.toFile());

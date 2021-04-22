@@ -12,6 +12,12 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
 
+/**
+ *
+ * Schematizza il messaggio di posta elettronica
+ * Implementa i vari getter e setter
+ * L’adapter serve per scrivere e leggere in formato json
+ */
 public class Email implements Serializable, Comparable<Email> {
     public transient static final SimpleDateFormat COMPACT_DATE_FORMAT = new SimpleDateFormat("dd-MM-yyyy");
     public transient static final SimpleDateFormat DATE_FORMAT =

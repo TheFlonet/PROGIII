@@ -4,6 +4,11 @@ import progiii.common.network.RequestType;
 
 import java.io.Serializable;
 
+/**
+ *
+ * Astrae il concetto di richiesta dal client
+ * Ogni tipo di richiesta (elencato in RequestType come enumerazione) ha la sua classe
+ */
 public abstract class Request implements Serializable {
     protected final String email;
 

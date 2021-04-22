@@ -31,6 +31,14 @@ public class LoginTask implements Runnable {
         this.controller = controller;
     }
 
+    /**
+     *
+     * Ottiene l'email del client attuale
+     * Invia una richiesta asincrona al server per verificare se esiste la casella
+     * Se ritorna errore lo mostra a finestra
+     * Se l'indirizzo è ben formato ma non esiste chiede di crearlo
+     * Se l'email esiste o si sceglie di crearla viene mandata una richiesta di autenticazione
+     */
     @Override
     public void run() {
         String email;
@@ -115,7 +123,7 @@ public class LoginTask implements Runnable {
                         controller.showMsg("Internal error");
                         controller.toggleInterface(true);
                     });
-                    throw new RuntimeException(" Unhandled response type" + response2.getType());
+                    throw new RuntimeException("Unhandled response type" + response2.getType());
                 }
             } else {
                 Platform.runLater(() -> {
@@ -128,10 +136,17 @@ public class LoginTask implements Runnable {
                 controller.showMsg("Internal error");
                 controller.toggleInterface(true);
             });
-            throw new RuntimeException("Unhandled ServerAnswer Type: " + response.getType());
+            throw new RuntimeException("Unhandled response Type: " + response.getType());
         }
     }
 
+    /**
+     *
+     * @param task
+     * @return
+     *
+     * Mostra un popup di errore al mancato ricevimento della risposta
+     */
     private Optional<Response> waitResponse(Future<Optional<Response>> task) {
         Consumer<String> error = (msg) -> {
             controller.showMsg(msg);

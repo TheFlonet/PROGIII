@@ -5,6 +5,11 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+/**
+ *
+ * Classe di appoggio con una mappa mail-bool
+ * Permette di controllare velocemente se tutte le mail inserite sono ben formate
+ */
 public class ValidatorCollector {
     private boolean areAllEmailsGood;
     private final Map<String, Boolean> validator;

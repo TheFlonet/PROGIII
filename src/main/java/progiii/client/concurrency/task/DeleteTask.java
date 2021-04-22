@@ -28,6 +28,11 @@ public class DeleteTask implements Runnable {
         this.executorService = executorService;
     }
 
+    /**
+     *
+     * Mette in pausa le richieste al server di pull
+     * Prepara ed esegue in modo asincrono la richiesta di delete di una mail
+     */
     @Override
     public void run() {
         FutureTask<Boolean> pullDelayer = new FutureTask<>(() -> Model.getInstance().pausePullReq(2));
@@ -42,14 +47,13 @@ public class DeleteTask implements Runnable {
         Future<Optional<Response>> futureResponse = executorService.submit(delete);
         Response response;
         try {
-            response = waitResponse(5, futureResponse).orElseThrow();
+            response = waitResponse(futureResponse).orElseThrow();
         } catch (NoSuchElementException e) {
             return;
         }
         if (response.getType() == ResponseType.ERROR)
             Platform.runLater(() -> new Alert(Alert.AlertType.WARNING, String.format("Error while cancelling emails %s", response.getStatus())).show());
         else if (response.getType() == ResponseType.DELETE) {
-            System.out.println(response);
             Platform.runLater(() -> {
                 MainController.getInstance().showStatusMsg("Emails deleted", Color.GREEN);
                 toDelete.forEach(MainController.getInstance()::deleteEmail);
@@ -60,9 +64,16 @@ public class DeleteTask implements Runnable {
         }
     }
 
-    private Optional<Response> waitResponse(int timeout, Future<Optional<Response>> future) {
+    /**
+     *
+     * @param future
+     * @return
+     *
+     * Mostra un popup di errore al mancato ricevimento della risposta
+     */
+    private Optional<Response> waitResponse(Future<Optional<Response>> future) {
         Consumer<String> error = (msg) -> new Alert(Alert.AlertType.WARNING, "Error while cancelling emails\n" + msg).show();
 
-        return Helper.waitForAnswer(timeout, future, "Delete", error, error);
+        return Helper.waitForAnswer(5, future, "Delete", error, error);
     }
 }

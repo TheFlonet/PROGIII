@@ -11,6 +11,11 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
+/**
+ *
+ * Schematizza il formato per i possibili eventi sul server
+ * Se l’evento non è concluso permette la stampa tramite Action
+ */
 public class Event implements Comparable<Event>{
     private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
     private String client = null;

@@ -14,7 +14,18 @@ import java.util.Optional;
 import java.util.concurrent.*;
 import java.util.function.Consumer;
 
+/**
+ *
+ * Classe di supporto per le richieste asincrone al server
+ */
 public class Helper {
+    /**
+     *
+     * @param request
+     * @return
+     *
+     * Apre il socket verso il server, scrive la richiesta e aspetta la risposta (opzionale)
+     */
     public static Callable<Optional<Response>> prepare(Request request) {
         return () -> {
             try (Socket s = new Socket(NetworkConfig.REMOTE_IP, NetworkConfig.SERVER_PORT);
@@ -29,6 +40,17 @@ public class Helper {
         };
     }
 
+    /**
+     *
+     * @param timeout
+     * @param optionalFuture
+     * @param caller
+     * @param errorHandler
+     * @param timeoutHandler
+     * @return
+     *
+     * Aspetta una potenziale risposta dal server, se non riceve nulla ritorna una risposta vuota
+     */
     public static Optional<Response> waitForAnswer(int timeout, Future<Optional<Response>> optionalFuture,
                                                    String caller, Consumer<String> errorHandler,
                                                    Consumer<String> timeoutHandler) {

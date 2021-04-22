@@ -34,6 +34,12 @@ public class SendTask implements Runnable {
         this.recipients = recipients;
     }
 
+    /**
+     *
+     * Controlla se le mail di destinazione esistono (in modo asincrono)
+     * Se esistono invia la mail a ogni destinatario
+     * Se non esistono segnala l'errore
+     */
     @Override
     public void run() {
         Consumer<String> error = (msg) -> {
@@ -85,6 +91,13 @@ public class SendTask implements Runnable {
         else Platform.runLater(() -> error.accept(sendResponse.getStatus()));
     }
 
+    /**
+     *
+     * @param optionalFuture
+     * @return
+     *
+     * Mostra un popup di errore al mancato ricevimento della risposta
+     */
     private Optional<Response> waitResponse(Future<Optional<Response>> optionalFuture) {
         Consumer<String> error = (msg) -> {
             sendAlert.close();

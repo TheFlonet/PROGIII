@@ -27,6 +27,12 @@ public class ConnectionHandler implements Runnable {
         this.connection = connection;
     }
 
+    /**
+     *
+     * Inizializza un evento
+     * Ottiene il lock fino a quando l’evento non è concluso
+     * Gestisce le varie richieste da parte dei client con uno switch
+     */
     @Override
     public void run() {
         Event event = new Event();
@@ -49,7 +55,7 @@ public class ConnectionHandler implements Runnable {
                         }
                         case CHECK -> {
                             CheckEmailReq check = (CheckEmailReq) request;
-                            Map<String, Boolean> existence = null;
+                            Map<String, Boolean> existence;
                             existence = check.getToCheck().stream().collect(Collectors.toMap(email -> email,
                                     email -> MailServer.getDataManager().userExists(email), (a, b) -> b, HashMap::new));
                             response = new EmailExistenceRes(existence);

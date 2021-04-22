@@ -20,6 +20,13 @@ public class MainController implements Initializable {
     @FXML
     private ListView<Event> eventList;
 
+    /**
+     *
+     * @param location
+     * @param resources
+     *
+     * Imposta la factory per riempire le celle con il contenuto (messaggi di log)
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         eventList.setCellFactory(eventListView -> new ListCell<>() {
@@ -28,7 +35,7 @@ public class MainController implements Initializable {
                 super.updateItem(item, empty);
                 if (item == null || empty) {
                     setText(null);
-                    setStyle("-fx-control-inner-background: derive(-fx-base,80%);"); //todo provare a rimuovere
+                    setStyle("-fx-control-inner-background: derive(-fx-base,80%);");
                 } else {
                     setText(item.toString());
                     String style = switch (item.getType()) {
@@ -42,31 +49,5 @@ public class MainController implements Initializable {
             }
         });
         eventList.setItems(Model.getInstance().getEvents().sorted());
-    }
-
-    private void openEventWindow(Event selectedItem) {
-        Stage stage = new Stage();
-        FXMLLoader eventWindow = new FXMLLoader(getClass().getResource("progiii/server/serverEvent.fxml"));
-        Scene scene;
-
-        try {
-            scene = new Scene(eventWindow.load());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-        EventController controller = eventWindow.getController();
-        controller.initialize(selectedItem);
-        stage.setTitle(selectedItem.toString());
-        stage.setScene(scene);
-        stage.sizeToScene();
-        stage.show();
-    }
-
-    @FXML
-    public void handleEventListMouseClick(MouseEvent mouseEvent) {
-        if (mouseEvent.getButton().equals(MouseButton.PRIMARY))
-            if (mouseEvent.getClickCount() == 2)
-                openEventWindow(eventList.getSelectionModel().getSelectedItem());
     }
 }

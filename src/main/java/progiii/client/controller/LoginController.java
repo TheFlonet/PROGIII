@@ -6,9 +6,13 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import progiii.client.concurrency.task.LoginTask;
+import progiii.common.util.StringUtils;
 
 import java.util.concurrent.ScheduledExecutorService;
 
+/**
+ * Gestisce la finestra di login
+ */
 public class LoginController {
     private ScheduledExecutorService executorService;
     @FXML
@@ -48,10 +52,21 @@ public class LoginController {
         status.setVisible(false);
     }
 
+    /**
+     *
+     * @param event
+     *
+     * Gestisce la richiesta di login
+     * Se non viene inserita l'email o non è valida non prosegue
+     */
     @FXML
     public void loginButtonClick(MouseEvent event) {
-        toggleInterface(false);
-        showMsg("Connection attempt");
-        executorService.submit(new LoginTask(executorService, this));
+        if (email.getText().isBlank() || email.getText().isEmpty() || !StringUtils.isValid(email.getText()))
+            showMsg("Invalid email");
+        else {
+            toggleInterface(false);
+            showMsg("Connection attempt");
+            executorService.submit(new LoginTask(executorService, this));
+        }
     }
 }

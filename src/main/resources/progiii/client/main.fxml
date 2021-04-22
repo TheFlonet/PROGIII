@@ -50,8 +50,7 @@
                         </tooltip>
                     </Button>
                 </GridPane>
-                <ListView fx:id="receivedEmails" editable="true" maxHeight="1.7976931348623157E308"
-                          onKeyReleased="#handleEmailTyped" onMouseClicked="#handleEmailClick" GridPane.hgrow="ALWAYS"
+                <ListView fx:id="receivedEmails" editable="true" maxHeight="2E308" onMouseClicked="#handleEmailClick" GridPane.hgrow="ALWAYS"
                           GridPane.rowIndex="1"/>
             </GridPane>
             <TabPane fx:id="tabPane" minHeight="600.0" minWidth="630.0" prefHeight="200.0" prefWidth="200.0"

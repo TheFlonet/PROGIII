@@ -9,6 +9,10 @@ import progiii.common.data.Email;
 
 import java.io.IOException;
 
+/**
+ *
+ * Controller per riempire le celle con le nuove email che arrivano
+ */
 public class CellController extends ListCell<Email> {
     @FXML
     private Label subject;

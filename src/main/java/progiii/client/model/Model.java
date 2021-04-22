@@ -8,6 +8,13 @@ import progiii.common.data.Email;
 
 import java.util.concurrent.ScheduledExecutorService;
 
+/**
+ *
+ * Singleton con lista osservabile delle email
+ * L'email locale
+ * Il pool thread
+ * Il service per il recupero delle email
+ */
 public class Model {
     private static Model INSTANCE;
     private final ObservableList<Email> receivedEmails = FXCollections.observableArrayList();
@@ -39,6 +46,13 @@ public class Model {
         return email;
     }
 
+    /**
+     *
+     * @param executorService
+     * @param emailGetter
+     *
+     * In mutex inizializza il pool thread e il getter delle email
+     */
     public synchronized void initialize(ScheduledExecutorService executorService, GetEmail emailGetter) {
         if (this.executorService != null || this.emailGetter != null)
             throw new IllegalStateException("Model has already been initialized");

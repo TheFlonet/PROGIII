@@ -5,6 +5,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import progiii.server.util.log.Event;
 
+/**
+ *
+ * Singleton che contiene una lista osservabile di eventi (log)
+ */
 public class Model {
     private static Model INSTANCE;
     private final ObservableList<Event> events = FXCollections.observableArrayList();

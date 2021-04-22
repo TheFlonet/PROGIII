@@ -17,6 +17,12 @@ public class ServerListener implements Runnable {
         this.executorService = executorService;
     }
 
+    /**
+     *
+     * Inizializza il server socket
+     * Fin quando non viene chiuso si mette in ascolto per un client
+     * Quando trova una richiesta la inoltra al connection handler
+     */
     @Override
     public void run() {
         try (ServerSocket serverSocket = new ServerSocket(NetworkConfig.SERVER_PORT)) {

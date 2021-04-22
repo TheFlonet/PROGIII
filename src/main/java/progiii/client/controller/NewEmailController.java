@@ -14,7 +14,17 @@ import java.util.Date;
 import java.util.concurrent.FutureTask;
 import java.util.concurrent.ScheduledExecutorService;
 
+/**
+ *
+ * Controller per gestire la scrittura di una nuova email
+ */
 public class NewEmailController extends TabController {
+    /**
+     *
+     * @param email
+     *
+     * Imposta i bind tra controller e model
+     */
     @Override
     public void initialize(Email email) {
         super.initialize(email);
@@ -31,6 +41,12 @@ public class NewEmailController extends TabController {
         return true;
     }
 
+    /**
+     *
+     * @param event
+     *
+     * Inizia la richiesta di invio della mail appena scritta (controlla prima che sia valida)
+     */
     @FXML
     private void handleSend(MouseEvent event) {
         String error = null;
@@ -67,6 +83,12 @@ public class NewEmailController extends TabController {
         alert.show();
     }
 
+    /**
+     *
+     * @param event
+     *
+     * Cancella la bozza in corso
+     */
     @FXML
     private void handleDeleteClick(MouseEvent event) {
         MainController.getInstance().deleteEmail(email);

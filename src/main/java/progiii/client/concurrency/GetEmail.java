@@ -34,6 +34,13 @@ public class GetEmail implements Runnable {
         this.emailAddr = emailAddr;
     }
 
+    /**
+     *
+     * Apre il socket per comunicare con il server, il flusso in input e in output
+     * Invia una richiesta di pull con gli id delle mail già scaricate
+     * In modo asincrono aggiorna la lista
+     * Se non riesce a connettersi periodicamente riprova
+     */
     @Override
     public void run() {
         try (Socket s = new Socket(NetworkConfig.REMOTE_IP, NetworkConfig.SERVER_PORT);
@@ -76,22 +83,40 @@ public class GetEmail implements Runnable {
         }
     }
 
+    /**
+     *
+     * Inizializza la richiesta periodica di email al server garantendo mutex
+     */
     public synchronized void startService() {
         if (currentExec == null || currentExec.isDone())
             currentExec = executorService.schedule(this, NetworkConfig.PULL_PERIOD, TimeUnit.SECONDS);
         else throw new IllegalStateException("Pull service already started");
     }
 
+    /**
+     *
+     * In mutex passa alla prossima richiesta
+     */
     public synchronized void nextRequest() {
         scheduleNextRequest(NetworkConfig.PULL_PERIOD);
     }
 
+    /**
+     *
+     * @param pullPeriod
+     *
+     * In mutex imposta la prossima richiesta dopo pullPeriod secondi
+     */
     private synchronized void scheduleNextRequest(int pullPeriod) {
         if (currentExec != null)
             currentExec = executorService.schedule(this, pullPeriod, TimeUnit.SECONDS);
         else throw new IllegalStateException("Pull service isn't running");
     }
 
+    /**
+     *
+     * In mutex interrompe il servizio
+     */
     public synchronized void stopService() {
         if (currentExec != null)
             currentExec.cancel(true);
@@ -99,6 +124,13 @@ public class GetEmail implements Runnable {
 
     }
 
+    /**
+     *
+     * @param delay
+     * @return
+     *
+     * In mutex mette in pausa il servizio per delay secondi
+     */
     public synchronized boolean pauseService(int delay) {
         if (currentExec != null) {
             int timeLeft = (int) currentExec.getDelay(TimeUnit.SECONDS);
@@ -110,6 +142,12 @@ public class GetEmail implements Runnable {
         } else throw new IllegalStateException("Pull service isn't initialized");
     }
 
+    /**
+     *
+     * @return
+     *
+     * Resetta i tentativi di connessione
+     */
     private int resetTries() {
         int old = failedConnectionTries;
         failedConnectionTries = 0;

@@ -34,37 +34,6 @@ public class MailClient extends Application {
         launch(args);
     }
 
-    private static void applySizeConstraints(final Stage stage) {
-        final Parent root = stage.getScene().getRoot();
-        stage.sizeToScene();
-        final double deltaW = stage.getWidth() - root.getLayoutBounds().getWidth();
-        final double deltaH = stage.getHeight() - root.getLayoutBounds().getHeight();
-        final Bounds minBounds = getBounds(root, Node::minWidth, Node::minHeight);
-        stage.setMinWidth(minBounds.getWidth() + deltaW);
-        stage.setMinHeight(minBounds.getHeight() + deltaH);
-        final Bounds prefBounds = getBounds(root, Node::prefWidth, Node::prefHeight);
-        stage.setWidth(prefBounds.getWidth() + deltaW);
-        stage.setHeight(prefBounds.getHeight() + deltaH);
-    }
-
-    private static Bounds getBounds(final Node node, final BiFunction<Node, Double, Double> widthFunction,
-                                    final BiFunction<Node, Double, Double> heightFunction) {
-        final Orientation bias = node.getContentBias();
-        double prefWidth;
-        double prefHeight;
-        if (bias == Orientation.HORIZONTAL) {
-            prefWidth = widthFunction.apply(node, (double) -1);
-            prefHeight = heightFunction.apply(node, prefWidth);
-        } else if (bias == Orientation.VERTICAL) {
-            prefHeight = heightFunction.apply(node, (double) -1);
-            prefWidth = widthFunction.apply(node, prefHeight);
-        } else {
-            prefWidth = widthFunction.apply(node, (double) -1);
-            prefHeight = heightFunction.apply(node, (double) -1);
-        }
-        return new BoundingBox(0, 0, prefWidth, prefHeight);
-    }
-
     public static MailClient getInstance() {
         return INSTANCE;
     }
@@ -73,6 +42,17 @@ public class MailClient extends Application {
         return executorService;
     }
 
+    /**
+     *
+     * @param stage
+     * @throws Exception
+     *
+     * Associa l’istanza caricata a quella per la singleton
+     * Inizializza il model
+     * Inizializza il pool thread (per gestire le attività possibili in parallelo)
+     * Inizializza il getter delle email, la finestra di login e quella principale
+     * Infine mostra la finestra di login
+     */
     @Override
     public void start(Stage stage) throws Exception {
         INSTANCE = this;
@@ -85,6 +65,13 @@ public class MailClient extends Application {
         showLogin();
     }
 
+    /**
+     *
+     * @return
+     * @throws IOException
+     *
+     * Carica la scena della schermata principale e imposta il listener per la chiusura
+     */
     public Stage initMain() throws IOException {
         Stage stage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/progiii/client/main.fxml"));
@@ -99,23 +86,43 @@ public class MailClient extends Application {
         stage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/progiii/client/icon.png"))));
         stage.setScene(scene);
         stage.sizeToScene();
-        applySizeConstraints(stage);
         return stage;
     }
 
+    /**
+     *
+     * Mostra la finestra principale
+     */
     public void showMain() {
         mainWindow.show();
         MainController.getInstance().clearStatusMsg();
     }
 
+    /**
+     *
+     * Nasconde la finestra principale
+     */
     public void hideMain() {
         mainWindow.hide();
     }
 
+    /**
+     *
+     * @param title
+     *
+     * Imposta il titolo della finestra principale (mail con cui si è loggati)
+     */
     public void setMainTitle(String title) {
         mainWindow.setTitle(title);
     }
 
+    /**
+     *
+     * @return
+     * @throws IOException
+     *
+     * Carica la finestra di login da xml
+     */
     public Stage initLogin() throws IOException {
         Stage stage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/progiii/client/login.fxml"));
@@ -129,17 +136,31 @@ public class MailClient extends Application {
         return stage;
     }
 
+    /**
+     *
+     * Mostra la finestra di login come popup
+     */
     public void showLogin() {
         loginWindow.show();
         loginWindow.setAlwaysOnTop(true);
         loginController.setEmailText("example@email.com");
     }
 
+    /**
+     *
+     * Nasconde la finestra di login
+     */
     public void hideLogin() {
         loginWindow.setAlwaysOnTop(false);
         loginWindow.hide();
     }
 
+    /**
+     *
+     * @throws Exception
+     *
+     * Termina il pool thread
+     */
     @Override
     public void stop() throws Exception {
         super.stop();

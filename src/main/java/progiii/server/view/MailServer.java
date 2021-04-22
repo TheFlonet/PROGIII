@@ -37,6 +37,17 @@ public class MailServer extends Application {
         return dataManager;
     }
 
+    /**
+     *
+     * @param stage
+     * @throws Exception
+     *
+     * Inizializza DataManager, Model, pool thread, ServerListener e la GUI
+     * NB il numero di thread è basso in quanto eseguito in locale
+     * Una implementazione reale dovrebbe prevedere più thread
+     * Questo permetterebbe maggiore scalabilità a parità di performance
+     * Si implementa il pool thread e non thread semplici per scalabilità
+     */
     @Override
     public void start(Stage stage) throws Exception {
         dataManager = new DataManager(Paths.get(Objects.requireNonNull(getClass().getResource("/progiii/server/data/")).toURI()));
@@ -46,6 +57,13 @@ public class MailServer extends Application {
         initWindow();
     }
 
+    /**
+     *
+     * @throws IOException
+     *
+     * La GUI carica l’fxml imposta il listener per la chiusura
+     * il listener si occupa di chiudere il ServerSocket, interrompere il pool thread e chiudere l’app
+     */
     private void initWindow() throws IOException {
         Stage stage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/progiii/server/main.fxml"));

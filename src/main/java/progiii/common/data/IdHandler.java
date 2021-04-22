@@ -8,6 +8,11 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.concurrent.atomic.AtomicInteger;
 
+/**
+ *
+ * Gestisce in modo atomico l’aumento del contatore per gli id
+ * L’adapter implementa I metodi per scrivere e leggere informazioni json
+ */
 public class IdHandler implements Serializable {
     private final AtomicInteger idCounter;
 

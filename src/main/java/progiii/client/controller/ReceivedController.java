@@ -13,6 +13,11 @@ import progiii.common.util.StringUtils;
 import java.util.Date;
 import java.util.Set;
 
+/**
+ *
+ * Controller per la lettura di una email
+ * Gestisce anche le varie opzioni (reply, reply all, forward, delete)
+ */
 public class ReceivedController extends TabController {
     private static final String replyFormat = """
                         
@@ -29,6 +34,12 @@ public class ReceivedController extends TabController {
     @FXML
     private Label date;
 
+    /**
+     *
+     * @param email
+     *
+     * Imposta i bind (mono o bi direzionali) tra controller e model
+     */
     public void initialize(Email email) {
         super.initialize(email);
         tab.textProperty().bind(email.subjectProperty());
@@ -39,6 +50,12 @@ public class ReceivedController extends TabController {
         date.setText(Email.DATE_FORMAT.format(email.getDate()));
     }
 
+    /**
+     *
+     * @return
+     *
+     * Imposta il testo iniziale per una risposta
+     */
     private String replyString() {
         return String.format(replyFormat, email.getFormattedDate(), email.getFrom(), email.getTo(), email.getSubject(), email.getText());
     }
@@ -48,11 +65,25 @@ public class ReceivedController extends TabController {
         return false;
     }
 
+    /**
+     *
+     * @param event
+     *
+     * Inizia una richiesta di eliminazione
+     */
     @FXML
     private void handleDelete(MouseEvent event) {
-        MailClient.getInstance().getExecutorService().submit(new DeleteTask(Set.of(email), Model.getInstance().getEmail(), MailClient.getInstance().getExecutorService()));
+        MailClient.getInstance().getExecutorService().submit(
+                new DeleteTask(Set.of(email), Model.getInstance().getEmail(), MailClient.getInstance().getExecutorService()));
     }
 
+    /**
+     *
+     * @param event
+     *
+     * Apre una nuova tab per scrivere una email di risposta
+     * Imposta già i campi (da, a, oggetto, testo di partenza)
+     */
     @FXML
     private void handleReply(MouseEvent event) {
         Email replyEmail = new Email(-1, Model.getInstance().getEmail(), email.getFrom(),
@@ -61,6 +92,13 @@ public class ReceivedController extends TabController {
         MainController.getInstance().setCurrentTab(replyTab);
     }
 
+    /**
+     *
+     * @param event
+     *
+     * Apre una nuova tab per inoltrare una email
+     * Imposta già i campi (da, a, oggetto, testo di partenza)
+     */
     @FXML
     private void handleForward(MouseEvent event) {
         Email forwardEmail = new Email(-1, Model.getInstance().getEmail(), "",
@@ -69,6 +107,13 @@ public class ReceivedController extends TabController {
         MainController.getInstance().setCurrentTab(forwardTab);
     }
 
+    /**
+     *
+     * @param event
+     *
+     * Apre una nuova tab per scrivere una mail di risposta a più utenti
+     * Imposta già i campi (da, a, oggetto, testo di partenza)
+     */
     @FXML
     private void handleReplyAll(MouseEvent event) {
         Set<String> recipients = StringUtils.cleanEmailList(email.getTo()).getEmails(true);
