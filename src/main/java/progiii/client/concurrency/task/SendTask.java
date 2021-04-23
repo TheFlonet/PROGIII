@@ -9,7 +9,6 @@ import progiii.common.network.ResponseType;
 import progiii.common.network.request.CheckEmailReq;
 import progiii.common.network.request.SendReq;
 import progiii.common.network.response.EmailExistenceRes;
-import progiii.common.network.response.ErrorRes;
 import progiii.common.network.response.Response;
 import progiii.common.util.ValidatorCollector;
 

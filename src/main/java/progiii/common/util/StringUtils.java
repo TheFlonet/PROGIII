@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
  * Controlla la ben formatezza di un indirizzo email
  */
 public class StringUtils {
-    private static Pattern emailPattern = Pattern.compile("[A-Za-z0-9_.-]+@.+[A-Za-z0-9_-]+");
+    private static final Pattern emailPattern = Pattern.compile("[A-Za-z0-9_.-]+@.+[A-Za-z0-9_-]+");
 
     public static String cleanEmail(String email) {
         if (email == null)

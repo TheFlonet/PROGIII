@@ -7,7 +7,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.input.*;
 import javafx.scene.paint.Color;
-import progiii.client.concurrency.task.DeleteTask;
 import progiii.client.model.Model;
 import progiii.client.view.MailClient;
 import progiii.common.data.Email;

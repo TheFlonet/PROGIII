@@ -2,7 +2,6 @@ package progiii.common.network.request;
 
 import progiii.common.network.RequestType;
 
-import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
