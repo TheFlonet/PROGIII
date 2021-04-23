@@ -1,0 +1,9 @@
+########################################################################################################################
+struttura dati persistenti del server (cartella data)
+file data.json
+    json per inizializzare e salvare lo stato della classe IdHandler
+    contiene un unico campo che rappresenta il prossimo id disponibile per una email
+la cartella data contiene una sottocartella per ogni email registrata
+della la cartella dell'email sono salvati i messaggi in formato json {idMsg}.json
+    NB la data di invio del messaggio è salvata come un numero intero (long)
+########################################################################################################################

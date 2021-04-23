@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane minHeight="630.0" minWidth="800.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="progiii.client.controller.MainController">
+    <center>
+        <SplitPane dividerPositions="0.2" prefHeight="420.0" prefWidth="800.0" BorderPane.alignment="CENTER">
+            <GridPane maxHeight="2E308" maxWidth="2E308" minWidth="160.0" SplitPane.resizableWithParent="false">
+                <columnConstraints>
+                    <ColumnConstraints halignment="CENTER" maxWidth="2E308" minWidth="10.0"/>
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints valignment="CENTER"/>
+                    <RowConstraints maxHeight="2E308" minHeight="10.0" prefHeight="455.0" vgrow="ALWAYS"/>
+                </rowConstraints>
+                <GridPane>
+                    <columnConstraints>
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0"/>
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0"/>
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="30.0" vgrow="SOMETIMES"/>
+                    </rowConstraints>
+                    <Button mnemonicParsing="false" onMouseClicked="#openNewEmailTab">
+                        <graphic>
+                            <ImageView fitHeight="16" fitWidth="16" pickOnBounds="true" preserveRatio="true">
+                                <Image url="@img/write.png"/>
+                            </ImageView>
+                        </graphic>
+                        <tooltip>
+                            <Tooltip text="Write"/>
+                        </tooltip>
+                    </Button>
+                    <Button mnemonicParsing="false" onMouseClicked="#logoutClick" GridPane.columnIndex="1">
+                        <graphic>
+                            <ImageView fitHeight="16" fitWidth="16" pickOnBounds="true" preserveRatio="true">
+                                <Image url="@img/logout.png"/>
+                            </ImageView>
+                        </graphic>
+                        <tooltip>
+                            <Tooltip text="Logout"/>
+                        </tooltip>
+                    </Button>
+                </GridPane>
+                <ListView fx:id="receivedEmails" editable="true" maxHeight="2E308" onMouseClicked="#handleEmailClick"
+                          GridPane.hgrow="ALWAYS" GridPane.rowIndex="1"/>
+            </GridPane>
+            <TabPane fx:id="tabPane" minHeight="600.0" minWidth="630.0" prefHeight="200.0" prefWidth="200.0"
+                     tabClosingPolicy="ALL_TABS"/>
+        </SplitPane>
+    </center>
+    <bottom>
+        <AnchorPane BorderPane.alignment="CENTER">
+            <Label fx:id="status" alignment="TOP_RIGHT" text="StatusBar" textAlignment="RIGHT"
+                   AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="0.0">
+                <padding>
+                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                </padding>
+            </Label>
+        </AnchorPane>
+    </bottom>
+</BorderPane>
