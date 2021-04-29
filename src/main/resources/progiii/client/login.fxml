@@ -14,7 +14,7 @@
             <Font name="Corbel" size="22.0"/>
         </font>
     </Label>
-    <Label alignment="CENTER" layoutX="15.0" layoutY="30.0" text="To Login insert a valid email" textAlignment="CENTER"
+    <Label alignment="CENTER" layoutX="15.0" layoutY="30.0" text="Insert an email" textAlignment="CENTER"
            AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="40.0">
         <font>
             <Font name="Corbel" size="19.0"/>
