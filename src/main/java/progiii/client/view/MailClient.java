@@ -38,7 +38,7 @@ public class MailClient extends Application {
 
     /**
      *
-     * @param stage
+     * @param stage stage dell'applicazione
      * @throws Exception
      *
      * Associa l’istanza caricata a quella per la singleton
@@ -61,7 +61,7 @@ public class MailClient extends Application {
 
     /**
      *
-     * @return
+     * @return lo stage della finestra principale
      * @throws IOException
      *
      * Carica la scena della schermata principale e imposta il listener per la chiusura
@@ -112,7 +112,7 @@ public class MailClient extends Application {
 
     /**
      *
-     * @return
+     * @return lo stage della finestra di login
      * @throws IOException
      *
      * Carica la finestra di login da xml

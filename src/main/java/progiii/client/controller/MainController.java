@@ -55,7 +55,7 @@ public class MainController implements Initializable {
 
     /**
      *
-     * @param location
+     * @param location url
      * @param resources
      *
      * Inizializza il model, la grafica delle tab apribili, la factory per le celle
@@ -100,7 +100,7 @@ public class MainController implements Initializable {
 
     /**
      *
-     * @param msg
+     * @param msg message to show
      * @param color
      *
      * Mostra un generico messaggio colorandolo
@@ -139,7 +139,7 @@ public class MainController implements Initializable {
 
     /**
      *
-     * @param selected
+     * @param selected message selected
      * @return
      *
      * Apre una tab per leggere un'email
@@ -162,9 +162,9 @@ public class MainController implements Initializable {
 
     /**
      *
-     * @param email
-     * @param tabStructure
-     * @param closerMethod
+     * @param email message selected
+     * @param tabStructure location of fxml
+     * @param closerMethod closer handler
      * @return
      *
      * Apre una generica tab e imposta il listener per la chiusura
@@ -198,7 +198,7 @@ public class MainController implements Initializable {
 
     /**
      *
-     * @param selected
+     * @param selected message selected
      * @param event
      *
      * Chiude la tab chiedendo prima all'utente conferma con un popup
@@ -232,7 +232,7 @@ public class MainController implements Initializable {
 
     /**
      *
-     * @param prompt
+     * @param prompt text to show
      * @return
      *
      * Chiude tutte le tab aperte

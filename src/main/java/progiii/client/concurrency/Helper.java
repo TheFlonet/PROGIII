@@ -21,7 +21,7 @@ import java.util.function.Consumer;
 public class Helper {
     /**
      *
-     * @param request
+     * @param request richiesta per il server
      * @return
      *
      * Apre il socket verso il server, scrive la richiesta e aspetta la risposta (opzionale)
@@ -42,11 +42,11 @@ public class Helper {
 
     /**
      *
-     * @param timeout
-     * @param optionalFuture
-     * @param caller
-     * @param errorHandler
-     * @param timeoutHandler
+     * @param timeout tempo limite per l'esecuzione del task
+     * @param optionalFuture task da eseguire
+     * @param caller stringa identificativa del chiamante
+     * @param errorHandler gestore degli errori
+     * @param timeoutHandler gestore in caso di timeout
      * @return
      *
      * Aspetta una potenziale risposta dal server, se non riceve nulla ritorna una risposta vuota

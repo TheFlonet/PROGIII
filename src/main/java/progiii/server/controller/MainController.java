@@ -15,7 +15,7 @@ public class MainController implements Initializable {
     private ListView<Event> eventList;
 
     /**
-     * @param location
+     * @param location url of a resource
      * @param resources Imposta la factory per riempire le celle con il contenuto (messaggi di log)
      */
     @Override

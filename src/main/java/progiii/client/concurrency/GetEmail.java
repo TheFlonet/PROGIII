@@ -103,7 +103,7 @@ public class GetEmail implements Runnable {
 
     /**
      *
-     * @param pullPeriod
+     * @param pullPeriod delay dopo il quale eseguire il task
      *
      * In mutex imposta la prossima richiesta dopo pullPeriod secondi
      */
@@ -126,7 +126,7 @@ public class GetEmail implements Runnable {
 
     /**
      *
-     * @param delay
+     * @param delay interrompe il servizio di pull per x secondi
      * @return
      *
      * In mutex mette in pausa il servizio per delay secondi

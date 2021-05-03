@@ -39,7 +39,7 @@ public class MailServer extends Application {
 
     /**
      *
-     * @param stage
+     * @param stage stage principale dell'applicazione
      * @throws Exception
      *
      * Inizializza DataManager, Model, pool thread, ServerListener e la GUI

@@ -142,7 +142,7 @@ public class LoginTask implements Runnable {
 
     /**
      *
-     * @param task
+     * @param task task da eseguire in modo asincrono
      * @return
      *
      * Mostra un popup di errore al mancato ricevimento della risposta

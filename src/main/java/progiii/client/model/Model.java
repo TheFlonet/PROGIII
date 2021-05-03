@@ -48,7 +48,7 @@ public class Model {
 
     /**
      *
-     * @param executorService
+     * @param executorService pool thread
      * @param emailGetter
      *
      * In mutex inizializza il pool thread e il getter delle email

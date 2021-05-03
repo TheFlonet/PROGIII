@@ -92,7 +92,7 @@ public class SendTask implements Runnable {
 
     /**
      *
-     * @param optionalFuture
+     * @param optionalFuture task da eseguire in modo asincrono
      * @return
      *
      * Mostra un popup di errore al mancato ricevimento della risposta

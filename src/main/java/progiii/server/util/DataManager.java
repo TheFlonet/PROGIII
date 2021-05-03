@@ -68,8 +68,8 @@ public class DataManager {
 
     /**
      *
-     * @param email
-     * @return
+     * @param email indirizzo di cui si ottiene il lock
+     * @return il lock
      * @throws IllegalArgumentException
      *
      * Ottiene il lock per la singola email e si occupa di rilasciarlo
@@ -85,8 +85,8 @@ public class DataManager {
 
     /**
      *
-     * @param email
-     * @return
+     * @param email indirizzo
+     * @return true se l'account esiste, false altrimenti
      * @throws IllegalArgumentException
      *
      * Controlla se esiste la cartella utente
@@ -98,9 +98,9 @@ public class DataManager {
 
     /**
      *
-     * @param email
-     * @param busyId
-     * @return
+     * @param email email del proprietario del client che ha svolto la richiesta
+     * @param busyId set degli id già nel client
+     * @return un set di email da spedire al client
      * @throws Exception
      *
      * Ottiene il set di email da spedire in risposta al client
@@ -138,7 +138,7 @@ public class DataManager {
 
     /**
      *
-     * @param email
+     * @param email email del proprietario del client che ha svolto la richiesta
      * @throws Exception
      *
      * Ottiene il lock per la mail e crea la cartella per la persistenza
@@ -159,8 +159,8 @@ public class DataManager {
 
     /**
      *
-     * @param recipient
-     * @param email
+     * @param recipient email del destinatario come stringa
+     * @param email messaggio da spedire
      *
      * Ottiene il lock per la mail del destinatario e invia il messaggio
      */
@@ -183,8 +183,8 @@ public class DataManager {
 
     /**
      *
-     * @param owner
-     * @param id
+     * @param owner email scritta come stringa
+     * @param id della mail
      * @return
      *
      * Ottiene il lock e elimina la mail (avendo l’id)
