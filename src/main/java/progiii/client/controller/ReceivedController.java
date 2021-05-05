@@ -86,7 +86,7 @@ public class ReceivedController extends TabController {
      */
     @FXML
     private void handleReply(MouseEvent event) {
-        Email replyEmail = new Email(-1, Model.getInstance().getEmail(), email.getFrom(),
+        Email replyEmail = new Email(Model.getInstance().getIdPlaceholder(), Model.getInstance().getEmail(), email.getFrom(),
                 "Re: " + email.getSubject(), replyString(), new Date());
         Tab replyTab = MainController.getInstance().openNewEmailTab(replyEmail);
         MainController.getInstance().setCurrentTab(replyTab);
@@ -101,7 +101,7 @@ public class ReceivedController extends TabController {
      */
     @FXML
     private void handleForward(MouseEvent event) {
-        Email forwardEmail = new Email(-1, Model.getInstance().getEmail(), "",
+        Email forwardEmail = new Email(Model.getInstance().getIdPlaceholder(), Model.getInstance().getEmail(), "",
                 "Fwd: " + email.getSubject(), replyString(), new Date());
         Tab forwardTab = MainController.getInstance().openNewEmailTab(forwardEmail);
         MainController.getInstance().setCurrentTab(forwardTab);
@@ -121,7 +121,7 @@ public class ReceivedController extends TabController {
         recipients.remove(localEmail);
         if (!email.getFrom().equals(localEmail))
             recipients.add(email.getFrom());
-        Email replyEmail = new Email(-1, Model.getInstance().getEmail(), String.join(", ", recipients),
+        Email replyEmail = new Email(Model.getInstance().getIdPlaceholder(), Model.getInstance().getEmail(), String.join(", ", recipients),
                 "Re: " + email.getSubject(), replyString(), new Date());
         Tab replyTab = MainController.getInstance().openNewEmailTab(replyEmail);
         MainController.getInstance().setCurrentTab(replyTab);

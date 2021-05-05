@@ -7,6 +7,7 @@ import progiii.client.concurrency.GetEmail;
 import progiii.common.data.Email;
 
 import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  *
@@ -21,6 +22,7 @@ public class Model {
     private final SimpleStringProperty email = new SimpleStringProperty();
     private ScheduledExecutorService executorService;
     private GetEmail emailGetter;
+    private final AtomicInteger idPlaceholder = new AtomicInteger();
 
     public Model() {
         if (INSTANCE != null)
@@ -32,6 +34,10 @@ public class Model {
         if (INSTANCE == null)
             throw new IllegalStateException("Model hasn't been initialized yet");
         return INSTANCE;
+    }
+
+    public int getIdPlaceholder() {
+        return idPlaceholder.incrementAndGet();
     }
 
     public String getEmail() {

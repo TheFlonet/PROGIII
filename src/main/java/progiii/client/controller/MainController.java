@@ -127,7 +127,7 @@ public class MainController implements Initializable {
      */
     @FXML
     private Tab openNewEmailTab() {
-        Email newEmail = new Email(-1, "from@me.com", "", "New Email", "", new Date());
+        Email newEmail = new Email(model.getIdPlaceholder(), "from@me.com", "", "New Email", "", new Date());
         Tab newEmailTab = openEmailTab(newEmail, draftStructure, this::closeTab);
         setCurrentTab(newEmailTab);
         return newEmailTab;
