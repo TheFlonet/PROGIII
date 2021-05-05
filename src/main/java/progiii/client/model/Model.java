@@ -37,7 +37,7 @@ public class Model {
     }
 
     public int getIdPlaceholder() {
-        return idPlaceholder.incrementAndGet();
+        return idPlaceholder.addAndGet(-1);
     }
 
     public String getEmail() {
